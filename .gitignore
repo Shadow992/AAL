@@ -1,0 +1,40 @@
+@@ -1,28 +0,0 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Some Directories
+SomeTest
+./AAL_Bytecode_Compiler/bin
+./AAL_Bytecode_Compiler/fasm
+./AAL_Bytecode_Compiler/obj
+./AAL_ByteCode_interpreter/Diagrams
+./AAL_ByteCode_interpreter/doxygen
+./AAL_ByteCode_interpreter/bin
+./AAL_ByteCode_interpreter/obj
+./AAL_ByteCode_interpreter/Getting Started
