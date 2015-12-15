@@ -30,11 +30,9 @@
 
 # Some Directories
 SomeTest
-./AAL_Bytecode_Compiler/bin
-./AAL_Bytecode_Compiler/fasm
-./AAL_Bytecode_Compiler/obj
-./AAL_ByteCode_interpreter/Diagrams
-./AAL_ByteCode_interpreter/doxygen
-./AAL_ByteCode_interpreter/bin
-./AAL_ByteCode_interpreter/obj
-./AAL_ByteCode_interpreter/Getting Started
+bin
+fasm
+obj
+Diagrams
+doxygen
+Getting Started

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="AAL_ByteCode_interpreter" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/AAL_ByteCode_interpreter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/AAL_ByteCode_interpreter" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-Wl,--stack,12000000" />
+					<Add library="E:\Program Files (x86)\CodeBlocks\MinGW\lib\libgdi32.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="include" />
+		</Compiler>
+		<Unit filename="include/AalVariable.h" />
+		<Unit filename="include/AllocationHelper.h" />
+		<Unit filename="include/BytecodeParser.h" />
+		<Unit filename="include/Hashtable.h" />
+		<Unit filename="include/Image.h" />
+		<Unit filename="include/Interpreter.h" />
+		<Unit filename="include/StandardFunctions.h" />
+		<Unit filename="include/TokenTypes.h" />
+		<Unit filename="include/UnitTest.h" />
+		<Unit filename="include/VariableManagement.h" />
+		<Unit filename="include/commonFuncs.h" />
+		<Unit filename="include/defines.h" />
+		<Unit filename="konzepte.txt" />
+		<Unit filename="src/AalVariable.cpp" />
+		<Unit filename="src/AllocationHelper.cpp" />
+		<Unit filename="src/BytecodeParser.cpp" />
+		<Unit filename="src/Hashtable.cpp" />
+		<Unit filename="src/Image.cpp" />
+		<Unit filename="src/Interpreter.cpp" />
+		<Unit filename="src/StandardFunctions.cpp" />
+		<Unit filename="src/UnitTest.cpp" />
+		<Unit filename="src/VariableManagement.cpp" />
+		<Unit filename="src/commonFuncs.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build extract_all="1" />
+				<doxyfile_warnings />
+				<doxyfile_output latex="1" />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

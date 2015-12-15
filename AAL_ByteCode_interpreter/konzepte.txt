@@ -1,0 +1,36 @@
+Variablen Verarbeitung:
+    vector<vector<map>>> var
+    $var1 in der Tiefe 4 und funktionstiefe 0 wäre dann var[4][0]["$var1"]
+    Bei jedem Funktionscall funktionstiefe um 1 erhöhen, wenn nach variablen in den Tiefen weiter oben gesucht wird, immer nur das letzte Element untersuchen,
+    also var[3].back()["$var1"], var[2].back()["$var1"] ...
+    Bei jedem Funktionsende letzte poppen
+
+
+
+InlineASM:
+    Beispielcode:
+
+        ByteArray var = #CompileASM("Pop edx \n Pop ecx \n add edx,ecx")
+
+        MyStack = new Stack();
+        MyStack.push(MyArg2);
+        MyStack.push(MyArg1);
+
+        exectue(var, MyStack);
+
+
+    push-Methode (MyStack,arg):
+        MyStack.Last_Address+=4
+        mov [MyStack.Last_Address], arg
+
+
+
+    execute-Methode (MyStack,opcode):
+        mov [MyStack.Start_adress], esp
+        mov esp, MyStack.Last_Adress
+        pushad
+        call opcode
+        popad
+        mov esp, [MyStack.Start_adress]
+
+

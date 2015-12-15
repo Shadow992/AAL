@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="AAL_Bytecode_Compiler" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/AAL_Bytecode_Compiler" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/AAL_Bytecode_Compiler" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="include" />
+		</Compiler>
+		<Unit filename="include/BytecodeGenerator.h" />
+		<Unit filename="include/BytecodeOptimizer.h" />
+		<Unit filename="include/BytecodeParser.h" />
+		<Unit filename="include/Compiler.h" />
+		<Unit filename="include/DynamicBitSet.h" />
+		<Unit filename="include/FunctionAndClassChecker.h" />
+		<Unit filename="include/LookUpTable.hpp" />
+		<Unit filename="include/OneWayHasher.h" />
+		<Unit filename="include/Optimizer.h" />
+		<Unit filename="include/Parser.h" />
+		<Unit filename="include/PreProcessor.h" />
+		<Unit filename="include/ProblemTypes.h" />
+		<Unit filename="include/SyntaxValidator.h" />
+		<Unit filename="include/Token.h" />
+		<Unit filename="include/TokenTypes.h" />
+		<Unit filename="include/Tokenizer.h" />
+		<Unit filename="include/commonFuncs.h" />
+		<Unit filename="include/defines.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="src/BytecodeGenerator.cpp" />
+		<Unit filename="src/BytecodeOptimizer.cpp" />
+		<Unit filename="src/BytecodeParser.cpp" />
+		<Unit filename="src/Compiler.cpp" />
+		<Unit filename="src/DynamicBitSet.cpp" />
+		<Unit filename="src/FunctionAndClassChecker.cpp" />
+		<Unit filename="src/OneWayHasher.cpp" />
+		<Unit filename="src/Optimizer.cpp" />
+		<Unit filename="src/Parser.cpp" />
+		<Unit filename="src/PreProcessor.cpp" />
+		<Unit filename="src/SyntaxValidator.cpp" />
+		<Unit filename="src/Token.cpp" />
+		<Unit filename="src/Tokenizer.cpp" />
+		<Unit filename="src/commonFuncs.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
