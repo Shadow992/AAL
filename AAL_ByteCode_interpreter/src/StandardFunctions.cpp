@@ -75,9 +75,8 @@ AalVariable* getRealParamVar(AalVariable* parameterVar, int i, int& realIndex)
     return parameterVar;
 }
 
-void clickMouse(const std::string& str, int x, int y)
+void clickMouse(HWND hwnd, int x, int y)
 {
-    HWND hwnd = FindWindowEx(0,0,0,(LPCSTR)str.c_str());
     SendMessage(hwnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM((short)x, (short)y));
     Sleep(5);
     SendMessage(hwnd, WM_LBUTTONUP, MK_LBUTTON, MAKELPARAM((short)x, (short)y));
@@ -144,10 +143,15 @@ int clickLeftBackground(AalVariable* parameterVar, AalVariable* returnVar)
     int x=tmpParamVar->getLongValue(realIdx);
     tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
     int y=tmpParamVar->getLongValue(realIdx);
-    tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
-    std::string* str=tmpParamVar->getStringPointer(realIdx);
-
-    clickMouse(*str,x,y);
+    
+	tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+	HWND arg0=(HWND)tmpParamVar->getLongValue(realIdx);
+	if(!IsWindow(arg0))
+	{
+		arg0=nullptr;
+	}
+    
+    clickMouse(arg0,x,y);
 
     return 0;
 }
