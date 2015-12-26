@@ -52,7 +52,7 @@ void extractPreProcess(Token* currToken, std::vector<Token*>& extracted )
 	}
 }
 
-/** \brief This function inserts recursive includes into given code (should be first operation after rading code)
+/** \brief This function inserts recursive includes into given code (should be first operation after reading code)
  *
  * \param
  * \param
