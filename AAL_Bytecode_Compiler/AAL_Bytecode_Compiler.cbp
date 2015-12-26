@@ -24,6 +24,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
+					<Add directory="../AAL_Shared/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,14 +36,17 @@
 			<Add option="-fexceptions" />
 			<Add directory="include" />
 		</Compiler>
+		<Unit filename="../AAL_Shared/include/DynamicBitSet.h" />
+		<Unit filename="../AAL_Shared/include/LookUpTable.hpp" />
+		<Unit filename="../AAL_Shared/include/OneWayHasher.h" />
+		<Unit filename="../AAL_Shared/include/TokenTypes.h" />
+		<Unit filename="../AAL_Shared/src/DynamicBitSet.cpp" />
+		<Unit filename="../AAL_Shared/src/OneWayHasher.cpp" />
 		<Unit filename="include/BytecodeGenerator.h" />
 		<Unit filename="include/BytecodeOptimizer.h" />
 		<Unit filename="include/BytecodeParser.h" />
 		<Unit filename="include/Compiler.h" />
-		<Unit filename="include/DynamicBitSet.h" />
 		<Unit filename="include/FunctionAndClassChecker.h" />
-		<Unit filename="include/LookUpTable.hpp" />
-		<Unit filename="include/OneWayHasher.h" />
 		<Unit filename="include/Optimizer.h" />
 		<Unit filename="include/Parser.h" />
 		<Unit filename="include/PreProcessor.h" />
@@ -59,9 +63,7 @@
 		<Unit filename="src/BytecodeOptimizer.cpp" />
 		<Unit filename="src/BytecodeParser.cpp" />
 		<Unit filename="src/Compiler.cpp" />
-		<Unit filename="src/DynamicBitSet.cpp" />
 		<Unit filename="src/FunctionAndClassChecker.cpp" />
-		<Unit filename="src/OneWayHasher.cpp" />
 		<Unit filename="src/Optimizer.cpp" />
 		<Unit filename="src/Parser.cpp" />
 		<Unit filename="src/PreProcessor.cpp" />

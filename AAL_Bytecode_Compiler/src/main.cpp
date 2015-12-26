@@ -62,9 +62,5 @@ int main( int argc, const char* argv[] )
         auto diffAll = endAll - startAll;
         std::cout << "Overall processing: " << std::chrono::duration <double, std::milli> (diffAll).count() << "ms" << std::endl;
     #endif
-
-    #if DEBUG > 0
-        system("PAUSE");
-    #endif
 	return 0;
 }

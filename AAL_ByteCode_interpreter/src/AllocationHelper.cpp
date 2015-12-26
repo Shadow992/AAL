@@ -82,15 +82,15 @@ AllocationHelper::~AllocationHelper()
 }
 
 
-NO_INLINE std::shared_ptr<void>* AllocationHelper::_allocateSharedPtr()
+NO_INLINE std::shared_ptr<InternalClassWrapper>* AllocationHelper::_allocateSharedPtr()
 {
-	return new std::shared_ptr<void>;
+	return new std::shared_ptr<InternalClassWrapper>;
 }
 
-std::shared_ptr<void>* AllocationHelper::allocateSharedPtr()
+std::shared_ptr<InternalClassWrapper>* AllocationHelper::allocateSharedPtr()
 {
-	std::shared_ptr<void>* ptr;
-	if(!allocatedLongs.empty())
+	std::shared_ptr<InternalClassWrapper>* ptr;
+	if(!allocatedSharedPtr.empty())
 	{
 		ptr=allocatedSharedPtr.back();
 		allocatedSharedPtr.pop_back();
@@ -100,7 +100,7 @@ std::shared_ptr<void>* AllocationHelper::allocateSharedPtr()
 		ptr=_allocateSharedPtr();
 	}
 	#if SHOW_MEM_ALLOCATIONS == 2
-        std::cout<<"alloced (std::shared_ptr<void>): "<<ptr<<std::endl;
+        std::cout<<"alloced (std::shared_ptr<InternalClassWrapper>): "<<ptr<<std::endl;
 	#endif
 
     #if SHOW_MEM_ALLOCATIONS >= 1
@@ -108,7 +108,7 @@ std::shared_ptr<void>* AllocationHelper::allocateSharedPtr()
 	#endif
 
     #if SHOW_MEM_ALLOCATIONS == 3
-        usedAdress["std::shared_ptr<void>"]++;
+        usedAdress["std::shared_ptr<InternalClassWrapper>"]++;
 	#endif
 
 	return ptr;
@@ -796,17 +796,17 @@ void AllocationHelper::recycleVecVar(std::vector<AalVariable*>* ptr)
 	unusedVecVars.push_back(ptr);
 }
 
-void AllocationHelper::recycleSharedPtr(std::shared_ptr<void>* ptr)
+void AllocationHelper::recycleSharedPtr(std::shared_ptr<InternalClassWrapper>* ptr)
 {
     #if SHOW_MEM_ALLOCATIONS == 2
-        std::cout<<"deleted (std::shared_ptr<void>): "<<ptr<<std::endl;
+        std::cout<<"deleted (std::shared_ptr<InternalClassWrapper>): "<<ptr<<std::endl;
     #endif
     #if SHOW_MEM_ALLOCATIONS >= 1
         currentAllocatedBlocks--;
 	#endif
 
 	#if SHOW_MEM_ALLOCATIONS == 3
-        usedAdress["std::shared_ptr<void>"]--;
+        usedAdress["std::shared_ptr<InternalClassWrapper>"]--;
 	#endif
 
 	if(allocatedSharedPtr.size()<maximumPreAllocs)

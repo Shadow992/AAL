@@ -49,6 +49,9 @@ Compiler::~Compiler()
     //dtor
 }
 
+/**
+ *  \brief This function generates a few temporary names for "temporary variables" (these variables only holds temporary results)
+ */
 void Compiler::generateTmpVars()
 {
     for(int i=0; i<20; i++)
@@ -58,6 +61,9 @@ void Compiler::generateTmpVars()
     }
 }
 
+/**
+ *  \brief This function generates a few temporary names for "temporary pointer" (these variables only holds temporary pointer)
+ */
 void Compiler::generateTmpPointer()
 {
     for(int i=0; i<20; i++)
@@ -67,6 +73,10 @@ void Compiler::generateTmpPointer()
     }
 }
 
+/**
+ *  \brief This function sets a temporary variable or pointer to unused (so it can be used again in ByteCode)
+ *  \param var Variable to set to unused
+ */
 void Compiler::setVarUnused(const std::string& var)
 {
     if(var.length()>1 &&  var[0]=='$')
@@ -82,6 +92,12 @@ void Compiler::setVarUnused(const std::string& var)
     }
 }
 
+/**
+ *  \brief This function renames all variables specified in original AAL-Code (e.g. "$var=10") to a variable which only contains numbers (e.g. "$10") 
+ *  \param currToken Variable to set to unused
+ *  \param renamedVars Variable to set to unused
+ *  \param cRenamedVars Number of renamed variables
+ */
 void Compiler::renameVars(Token* currToken,std::map<std::string,int>& renamedVars,int& cRenamedVars)
 {
     for(auto it=currToken->childTokens.begin(); it!=currToken->childTokens.end(); ++it)

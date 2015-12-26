@@ -139,7 +139,7 @@ void AalVariable::clear(AalVariable* var)
 				allocator.recycleAalVar((AalVariable*)(*(var->value))[i]);
 				break;
             case TYPE_INTERNAL_CLASS:
-                allocator.recycleSharedPtr((std::shared_ptr<void>*)(*(var->value))[i]);
+                allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)(*(var->value))[i]);
                 break;
 			default:
 				break;
@@ -187,7 +187,7 @@ void AalVariable::clearValues()
 				((AalVariable*)(*(value))[i])->clearValues();
 				break;
             case TYPE_INTERNAL_CLASS:
-                allocator.recycleSharedPtr((std::shared_ptr<void>*)(*(value))[i]);
+                allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)(*(value))[i]);
                 break;
 			default:
 				break;
@@ -252,7 +252,7 @@ void AalVariable::clearCompletely(AalVariable* var)
 				delete (AalVariable*)(*(var->value))[i];
 			break;
             case TYPE_INTERNAL_CLASS:
-                delete (std::shared_ptr<void>*)(*(var->value))[i];
+                delete (std::shared_ptr<InternalClassWrapper>*)(*(var->value))[i];
             break;
 			default:
 			break;
@@ -747,7 +747,7 @@ void AalVariable::convertToDouble(const int idx)
     case TYPE_INTERNAL_CLASS:
     {
         void* var1=(*value)[idx];
-		allocator.recycleSharedPtr((std::shared_ptr<void>*)var1);
+		allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)var1);
         var1 = allocator.allocateDouble();
         (*valueType)[idx]=TYPE_DOUBLE;
         (*value)[idx]=var1;
@@ -795,7 +795,7 @@ void AalVariable::convertToLong(const int idx)
     case TYPE_INTERNAL_CLASS:
     {
         void* var1=(*value)[idx];
-		allocator.recycleSharedPtr((std::shared_ptr<void>*)var1);
+		allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)var1);
         var1 = allocator.allocateLongLong();
         (*valueType)[idx]=TYPE_LONG;
         (*value)[idx]=var1;
@@ -841,7 +841,7 @@ void AalVariable::convertToString(const int idx)
     case TYPE_INTERNAL_CLASS:
     {
         void* var1=(*value)[idx];
-		allocator.recycleSharedPtr((std::shared_ptr<void>*)var1);
+		allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)var1);
         var1 = allocator.allocateString();
         (*valueType)[idx]=TYPE_STRING;
         (*value)[idx]=var1;
@@ -892,7 +892,7 @@ void AalVariable::setType(const int idx,char type)
 		allocator.recycleAalVar((AalVariable*)(*value)[idx]);
 		break;
     case TYPE_INTERNAL_CLASS:
-        allocator.recycleSharedPtr((std::shared_ptr<void>*)(*(value))[idx]);
+        allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)(*(value))[idx]);
         break;
     default:
         break;
@@ -967,7 +967,7 @@ void AalVariable::setValue(const std::string& val, char type,int idx)
         isString=true;
         break;
     case TYPE_INTERNAL_CLASS:
-        allocator.recycleSharedPtr((std::shared_ptr<void>*)var1);
+        allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)var1);
         break;
     }
 
@@ -1047,7 +1047,7 @@ void AalVariable::setValue(const long long val, char type,int idx)
         allocator.recycleString((std::string*)var1);
         break;
     case TYPE_INTERNAL_CLASS:
-        allocator.recycleSharedPtr((std::shared_ptr<void>*)var1);
+        allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)var1);
         break;
     }
 
@@ -1129,7 +1129,7 @@ void AalVariable::setValue(const double val, char type,int idx)
         allocator.recycleString((std::string*)var1);
         break;
     case TYPE_INTERNAL_CLASS:
-        allocator.recycleSharedPtr((std::shared_ptr<void>*)var1);
+        allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)var1);
         break;
     }
 
@@ -1382,7 +1382,7 @@ void AalVariable::setValue(AalVariable* src, int idxDest, int idxSrc)
 		}
 		break;
         case TYPE_INTERNAL_CLASS:
-            allocator.recycleSharedPtr((std::shared_ptr<void>*)destValue);
+            allocator.recycleSharedPtr((std::shared_ptr<InternalClassWrapper>*)destValue);
             break;
         break;
     }
@@ -1411,7 +1411,7 @@ void AalVariable::setValue(AalVariable* src, int idxDest, int idxSrc)
 		}
 		break;
         case TYPE_INTERNAL_CLASS:
-            *((std::shared_ptr<void>*) destValue)=*((std::shared_ptr<void>*) (*(src->value))[idxSrc]);
+            *((std::shared_ptr<InternalClassWrapper>*) destValue)=*((std::shared_ptr<InternalClassWrapper>*) (*(src->value))[idxSrc]);
 			(*(realDest->valueType))[idxDest]=TYPE_INTERNAL_CLASS;
             break;
         break;
@@ -1504,7 +1504,7 @@ bool AalVariable::isFalse(int idx)
 		}
 		break;
 		case TYPE_INTERNAL_CLASS:
-		    return *((std::shared_ptr<void>*)(*(realVar->value))[idx])==nullptr;
+		    return *((std::shared_ptr<InternalClassWrapper>*)(*(realVar->value))[idx])==nullptr;
         break;
     }
     return false;
@@ -1540,7 +1540,7 @@ bool AalVariable::isTrue(int idx)
 		case TYPE_STRING:
 			return *((std::string*)(*(realVar->value))[idx]) != STR_FALSE;
         case TYPE_INTERNAL_CLASS:
-		    return *((std::shared_ptr<void>*)(*(realVar->value))[idx])!=nullptr;
+		    return *((std::shared_ptr<InternalClassWrapper>*)(*(realVar->value))[idx])!=nullptr;
         break;
     }
     return false;
@@ -1582,7 +1582,7 @@ double* AalVariable::getDoublePointer(const int idx)
     return (double*)(*value)[idx];
 }
 
-std::shared_ptr<void>* AalVariable::getSharedPointer(int idxDest)
+std::shared_ptr<InternalClassWrapper>* AalVariable::getSharedPointer(int idxDest)
 {
     if (valueType==nullptr)
 		construct(TYPE_INTERNAL_CLASS);
@@ -1606,14 +1606,14 @@ std::shared_ptr<void>* AalVariable::getSharedPointer(int idxDest)
 		}
 		break;
         case TYPE_INTERNAL_CLASS:
-            return (std::shared_ptr<void>*)destValue;
+            return (std::shared_ptr<InternalClassWrapper>*)destValue;
             break;
         break;
     }
 
     (*(value))[idxDest]=allocator.allocateSharedPtr();
     (*(valueType))[idxDest]=TYPE_INTERNAL_CLASS;
-    return (std::shared_ptr<void>*)(*(value))[idxDest];
+    return (std::shared_ptr<InternalClassWrapper>*)(*(value))[idxDest];
 }
 
 /**

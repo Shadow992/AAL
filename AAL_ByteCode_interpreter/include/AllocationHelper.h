@@ -7,6 +7,7 @@
 #include "Hashtable.h"
 #include "../src/Hashtable.cpp"
 #include "AalVariable.h"
+#include "InternalClassWrapper.h"
 
 /**
 * \brief This class makes allocation faster and more efficient by allocating big chunks or/and reusing old allocated blocks.
@@ -28,13 +29,13 @@ class AllocationHelper
 		std::vector<Hashtable<AalVariable>*>* allocateVectorMap();
 		std::vector<AalVariable*>* allocateVecVar();
         std::vector<std::vector<AalVariable*>*>* allocateVecVecVar();
-        std::shared_ptr<void>* allocateSharedPtr();
+        std::shared_ptr<InternalClassWrapper>* allocateSharedPtr();
 
 		void recycleAalVar(AalVariable* ptr);
 		void recycleString(std::string*);
 		void recycleDouble(double*);
 		void recycleLongLong(long long*);
-		void recycleSharedPtr(std::shared_ptr<void>*);
+		void recycleSharedPtr(std::shared_ptr<InternalClassWrapper>*);
 		void recycleCharVector(std::vector<char>*);
 		void recycleVoidVector(std::vector<void*>*);
 
@@ -55,7 +56,7 @@ class AllocationHelper
 		NO_INLINE std::vector<Hashtable<AalVariable>*>* _allocateVectorMap();
 		NO_INLINE std::vector<AalVariable*>* _allocateVecVar();
         NO_INLINE std::vector<std::vector<AalVariable*>*>* _allocateVecVecVar();
-        NO_INLINE std::shared_ptr<void>* _allocateSharedPtr();
+        NO_INLINE std::shared_ptr<InternalClassWrapper>* _allocateSharedPtr();
 
         std::vector<double*> allocatedDoubles;
         std::vector<std::string*> allocatedStrings;
@@ -63,7 +64,7 @@ class AllocationHelper
 		std::vector<AalVariable*> allocatedAalVars;
 		std::vector<std::vector<void*>*> allocatedVoidVectors;
 		std::vector<std::vector<char>*> allocatedCharVectors;
-        std::vector<std::shared_ptr<void>*> allocatedSharedPtr;
+        std::vector<std::shared_ptr<InternalClassWrapper>*> allocatedSharedPtr;
 
 		std::vector<std::vector<Hashtable<AalVariable>*>*> vectorMapsToFree;
 		std::vector<Hashtable<AalVariable>*> mapsToFree;

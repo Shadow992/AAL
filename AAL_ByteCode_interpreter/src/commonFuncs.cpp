@@ -1,5 +1,10 @@
 #include "commonFuncs.h"
 
+bool isRelativelyPrime(unsigned long long a, unsigned long long b)
+{
+   return (a<b) ? isRelativelyPrime(b,a) : !(a%b) ? (b==1LL) : isRelativelyPrime (b, a%b);
+}
+
 /**
 * \brief This function checks if given type is some sort of variable (TYPE_PTR_VARIABLE or TYPE_TMP_VARIABLE or TYPE_VARIABLE).
 *

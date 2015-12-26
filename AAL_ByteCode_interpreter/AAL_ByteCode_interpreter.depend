@@ -1520,3 +1520,311 @@
 	<cmath>
 	<algorithm>
 
+1450816332 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\aalvariable.cpp
+	"AalVariable.h"
+	"AllocationHelper.h"
+
+1450819013 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\aalvariable.h
+	"defines.h"
+	"commonFuncs.h"
+	"TokenTypes.h"
+	"InternalClassWrapper.h"
+	<string.h>
+	<string>
+	<algorithm>
+	<sstream>
+	<iomanip>
+	<fstream>
+	<cmath>
+	<stdio.h>
+	<iostream>
+	<memory>
+
+1451132814 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\defines.h
+	<thread>
+	<mutex>
+	<chrono>
+	<windows.h>
+
+1451049327 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\commonfuncs.h
+	"defines.h"
+	"TokenTypes.h"
+	"AalVariable.h"
+	<string.h>
+	<string>
+	<algorithm>
+	<sstream>
+	<iomanip>
+	<fstream>
+	<stdio.h>
+	<stdlib.h>
+
+1449776749 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\tokentypes.h
+
+1450818908 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\allocationhelper.h
+	<string>
+	<vector>
+	<map>
+	"Hashtable.h"
+	"../src/Hashtable.cpp"
+	"AalVariable.h"
+	"InternalClassWrapper.h"
+
+1448656101 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\hashtable.h
+	<vector>
+	"defines.h"
+
+1448665021 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\hashtable.cpp
+	"Hashtable.h"
+
+1451131378 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\allocationhelper.cpp
+	"AllocationHelper.h"
+
+1448744947 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\bytecodeparser.cpp
+	"BytecodeParser.h"
+
+1448922814 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\bytecodeparser.h
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"defines.h"
+	"AalVariable.h"
+	<map>
+	<stdlib.h>
+	<string>
+	<list>
+	<vector>
+	<iostream>
+
+1451049296 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\commonfuncs.cpp
+	"commonFuncs.h"
+
+1448665021 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\hashtable.cpp
+	"Hashtable.h"
+
+1450139124 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\image.cpp
+	"Image.h"
+
+1450138738 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\image.h
+	<iostream>
+	<fstream>
+	<iomanip>
+	<Windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<vector>
+	<cmath>
+	<algorithm>
+
+1451056314 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\interpreter.cpp
+	"Interpreter.h"
+
+1451049473 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\interpreter.h
+	"ClassPrototypes.h"
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"defines.h"
+	"BytecodeParser.h"
+	"VariableManagement.h"
+	"UserInterface.h"
+	"StandardFunctions.h"
+	<map>
+	<stdlib.h>
+	<string>
+	<list>
+	<vector>
+	<iostream>
+	<map>
+	"AalVariable.h"
+	"AllocationHelper.h"
+	"OneWayHasher.h"
+	<chrono>
+
+1447604894 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\variablemanagement.h
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"defines.h"
+	"BytecodeParser.h"
+	"Hashtable.h"
+	"AalVariable.h"
+	"AllocationHelper.h"
+	<map>
+	<stdlib.h>
+	<string>
+	<list>
+	<vector>
+	<iostream>
+	<chrono>
+
+1451080906 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\standardfunctions.h
+	"ClassPrototypes.h"
+	"AalVariable.h"
+	"BytecodeParser.h"
+	"Image.h"
+	"AllocationHelper.h"
+	"InternalClassWrapper.h"
+	"Interpreter.h"
+	"Control.h"
+	"Window.h"
+	"UserInterface.h"
+	<map>
+	<time.h>
+	<algorithm>
+	<chrono>
+
+1450028360 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\main.cpp
+	"AllocationHelper.h"
+	"commonFuncs.h"
+	"TokenTypes.h"
+	"defines.h"
+	"BytecodeParser.h"
+	"AalVariable.h"
+	"Interpreter.h"
+	"VariableManagement.h"
+	"Hashtable.h"
+	"UnitTest.h"
+	"StandardFunctions.h"
+	<stdio.h>
+	<fstream>
+	<iostream>
+	<map>
+	"commonFuncs.cpp"
+	"BytecodeParser.cpp"
+	"AalVariable.cpp"
+	"AllocationHelper.cpp"
+	"Interpreter.cpp"
+	"VariableManagement.cpp"
+	"Hashtable.cpp"
+	"UnitTest.cpp"
+	"StandardFunctions.cpp"
+
+1446998813 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\unittest.h
+	"AllocationHelper.h"
+	"commonFuncs.h"
+	"TokenTypes.h"
+	"defines.h"
+	"BytecodeParser.h"
+	"AalVariable.h"
+	"Interpreter.h"
+	"VariableManagement.h"
+	"Hashtable.h"
+	<assert.h>
+
+1451049296 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\commonfuncs.cpp
+	"commonFuncs.h"
+
+1448744947 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\bytecodeparser.cpp
+	"BytecodeParser.h"
+
+1450816332 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\aalvariable.cpp
+	"AalVariable.h"
+	"AllocationHelper.h"
+
+1451131378 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\allocationhelper.cpp
+	"AllocationHelper.h"
+
+1451056314 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\interpreter.cpp
+	"Interpreter.h"
+
+1449088506 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\variablemanagement.cpp
+	"VariableManagement.h"
+
+1448922766 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\unittest.cpp
+	"UnitTest.h"
+
+1451131410 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\standardfunctions.cpp
+	"StandardFunctions.h"
+
+1448922766 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\unittest.cpp
+	"UnitTest.h"
+
+1449088506 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\variablemanagement.cpp
+	"VariableManagement.h"
+
+1450818925 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\internalclasswrapper.h
+	"Image.h"
+
+1450817006 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\internalclasswrapper.cpp
+	"InternalClassWrapper.h"
+
+1450819437 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\classprototypes.h
+
+1451067960 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\control.cpp
+	"Control.h"
+
+1451068029 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\control.h
+	<vector>
+	<map>
+	<Windows.h>
+	"Window.h"
+	"UserInterface.h"
+
+1450803527 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\window.h
+	<vector>
+	<map>
+	<Windows.h>
+	"Control.h"
+	"UserInterface.h"
+
+1450829859 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\userinterface.h
+	"ClassPrototype.h"
+	<vector>
+	<list>
+	<map>
+	<mutex>
+	<Windows.h>
+	"Control.h"
+	"Window.h"
+	<iostream>
+	<thread>
+	<atomic>
+
+1450800635 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\include\classprototype.h
+	<string>
+	<Windows.h>
+	<future>
+
+1451080819 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\userinterface.cpp
+	"UserInterface.h"
+
+1451073187 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\window.cpp
+	"Window.h"
+
+1451131410 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\src\standardfunctions.cpp
+	"StandardFunctions.h"
+
+1442854782 source:c:\users\marcel\dropbox\codes c++\aal\aal_shared\src\dynamicbitset.cpp
+	"DynamicBitSet.h"
+	"LookUpTable.hpp"
+
+1442363507 c:\users\marcel\dropbox\codes c++\aal\aal_shared\include\dynamicbitset.h
+	<cstdint>
+	<iostream>
+	<cstring>
+	<vector>
+	<deque>
+	<iostream>
+	<functional>
+	<algorithm>
+	<iterator>
+
+1442363251 c:\users\marcel\dropbox\codes c++\aal\aal_shared\include\lookuptable.hpp
+
+1449776751 c:\users\marcel\dropbox\codes c++\aal\aal_shared\include\tokentypes.h
+
+1442419096 source:c:\users\marcel\dropbox\codes c++\aal\aal_shared\src\onewayhasher.cpp
+	"OneWayHasher.h"
+
+1442577552 c:\users\marcel\dropbox\codes c++\aal\aal_shared\include\onewayhasher.h
+	<map>
+	<chrono>
+	<random>
+	<iostream>
+	<algorithm>
+	<cmath>
+	"commonFuncs.h"
+	"DynamicBitSet.h"
+
+1450801613 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_interpreter\other\resources.rc
+

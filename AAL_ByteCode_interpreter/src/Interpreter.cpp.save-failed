@@ -9,8 +9,8 @@ Interpreter::Interpreter(const std::string& code)
 
 Interpreter::~Interpreter()
 {
-    delete ui;
     delete aalStandardFunctions;
+    delete ui;
 }
 
 /**
@@ -107,7 +107,7 @@ void Interpreter::extractValuesForOperations(BytecodeLine* bytecode, char& type,
 */
 void Interpreter::extractValues(BytecodeLine* bytecode,char& type,double& tmpDouble1, double& tmpDouble2,long long& tmpLong1, long long& tmpLong2, std::string& tmpString1, std::string& tmpString2)
 {
-    if(isTypeVar(bytecode->arg1Type))
+	if(isTypeVar(bytecode->arg1Type))
     {
         tmpArg1Var=varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
         if(tmpArg1Var->isDouble())
@@ -115,7 +115,7 @@ void Interpreter::extractValues(BytecodeLine* bytecode,char& type,double& tmpDou
             tmpDouble1=tmpArg1Var->getDoubleValue(0);
             type=TYPE_DOUBLE;
         }
-        else if(tmpArg1Var->isString())
+		else if(tmpArg1Var->isString())
         {
             tmpString1=tmpArg1Var->getStringValue(0);
             type=TYPE_STRING;
@@ -133,7 +133,7 @@ void Interpreter::extractValues(BytecodeLine* bytecode,char& type,double& tmpDou
             tmpDouble1=bytecode->arg1Double;
             type=TYPE_DOUBLE;
         }
-        else if(bytecode->arg1Type==TYPE_STRING)
+		else if(bytecode->arg1Type==TYPE_STRING)
         {
             tmpString1=bytecode->arg1;
             type=TYPE_STRING;
@@ -162,7 +162,7 @@ void Interpreter::extractValues(BytecodeLine* bytecode,char& type,double& tmpDou
         {
             tmpLong2=tmpArg2Var->getLongValue(0);
         }
-        else
+		else
         {
             tmpString2=tmpArg2Var->getStringValue(0);
         }
@@ -183,7 +183,7 @@ void Interpreter::extractValues(BytecodeLine* bytecode,char& type,double& tmpDou
         {
             tmpLong2=bytecode->arg2Long;
         }
-        else
+		else
         {
             if(bytecode->arg2Type==TYPE_DOUBLE)
             {
@@ -222,7 +222,7 @@ void Interpreter::extractLongsForOperations(BytecodeLine* bytecode, long long& t
         {
             tmpLong1=(long long) bytecode->arg1Double;
         }
-        else if(bytecode->arg1Type==TYPE_STRING)
+		else if(bytecode->arg1Type==TYPE_STRING)
         {
             tmpLong1=0;
         }
@@ -243,7 +243,7 @@ void Interpreter::extractLongsForOperations(BytecodeLine* bytecode, long long& t
         {
             tmpLong2=(long long) bytecode->arg2Double;
         }
-        else if(bytecode->arg2Type==TYPE_STRING)
+		else if(bytecode->arg2Type==TYPE_STRING)
         {
             tmpLong2=0;
         }
@@ -333,7 +333,7 @@ void Interpreter::extractDoublesForOperations(BytecodeLine* bytecode, double& tm
         {
             tmpDouble1=bytecode->arg1Double;
         }
-        else if(bytecode->arg1Type==TYPE_STRING)
+		else if(bytecode->arg1Type==TYPE_STRING)
         {
             tmpDouble1=0.0;
         }
@@ -354,7 +354,7 @@ void Interpreter::extractDoublesForOperations(BytecodeLine* bytecode, double& tm
         {
             tmpDouble2=bytecode->arg2Double;
         }
-        else if(bytecode->arg2Type==TYPE_STRING)
+		else if(bytecode->arg2Type==TYPE_STRING)
         {
             tmpDouble2=0.0;
         }
@@ -386,7 +386,7 @@ void Interpreter::extractStringsForOperations(BytecodeLine* bytecode, std::strin
         {
             tmpString1=toString(bytecode->arg1Double);
         }
-        else if(bytecode->arg1Type==TYPE_STRING)
+		else if(bytecode->arg1Type==TYPE_STRING)
         {
             tmpString1=bytecode->arg1;
         }
@@ -407,7 +407,7 @@ void Interpreter::extractStringsForOperations(BytecodeLine* bytecode, std::strin
         {
             tmpString2=toString(bytecode->arg2Double);
         }
-        else if(bytecode->arg2Type==TYPE_STRING)
+		else if(bytecode->arg2Type==TYPE_STRING)
         {
             tmpString2=bytecode->arg2;
         }
@@ -431,59 +431,59 @@ void Interpreter::addToVariableAsParameter(AalVariable* assignVar, BytecodeLine*
 {
     if(isTypeVar(bytecode->assignVarType) && isTypeVar(bytecode->arg1Type) && bytecode->assignVarLong==bytecode->arg1Long && bytecode->assignVarType==bytecode->arg1Type )
     {
-        if(isTypeVar(bytecode->arg2Type))
-        {
-            assignVar->appendAsParameter(varManager.getVar(bytecode->arg2Long,bytecode->arg2Type));
-        }
-        else if(bytecode->arg2Type==TYPE_STRING)
-        {
-            assignVar->appendAsParameter(bytecode->arg2);
-        }
-        else if(bytecode->arg2Type==TYPE_LONG)
-        {
-            assignVar->appendAsParameter(bytecode->arg2Long);
-        }
-        else if(bytecode->arg2Type==TYPE_DOUBLE)
-        {
-            assignVar->appendAsParameter(bytecode->arg2Double);
-        }
+		if(isTypeVar(bytecode->arg2Type))
+		{
+			assignVar->appendAsParameter(varManager.getVar(bytecode->arg2Long,bytecode->arg2Type));
+		}
+		else if(bytecode->arg2Type==TYPE_STRING)
+		{
+			assignVar->appendAsParameter(bytecode->arg2);
+		}
+		else if(bytecode->arg2Type==TYPE_LONG)
+		{
+			assignVar->appendAsParameter(bytecode->arg2Long);
+		}
+		else if(bytecode->arg2Type==TYPE_DOUBLE)
+		{
+			assignVar->appendAsParameter(bytecode->arg2Double);
+		}
     }
     else
     {
         assignVar->clear();
-        if(isTypeVar(bytecode->arg1Type))
-        {
-            assignVar->appendAsParameter(varManager.getVar(bytecode->arg1Long,bytecode->arg1Type));
-        }
-        else if(bytecode->arg1Type==TYPE_STRING)
-        {
-            assignVar->appendAsParameter(bytecode->arg1);
-        }
-        else if(bytecode->arg1Type==TYPE_LONG)
-        {
-            assignVar->appendAsParameter(bytecode->arg1Long);
-        }
-        else if(bytecode->arg1Type==TYPE_DOUBLE)
-        {
-            assignVar->appendAsParameter(bytecode->arg1Double);
-        }
+		if(isTypeVar(bytecode->arg1Type))
+		{
+			assignVar->appendAsParameter(varManager.getVar(bytecode->arg1Long,bytecode->arg1Type));
+		}
+		else if(bytecode->arg1Type==TYPE_STRING)
+		{
+			assignVar->appendAsParameter(bytecode->arg1);
+		}
+		else if(bytecode->arg1Type==TYPE_LONG)
+		{
+			assignVar->appendAsParameter(bytecode->arg1Long);
+		}
+		else if(bytecode->arg1Type==TYPE_DOUBLE)
+		{
+			assignVar->appendAsParameter(bytecode->arg1Double);
+		}
 
-        if(isTypeVar(bytecode->arg2Type))
-        {
-            assignVar->appendAsParameter(varManager.getVar(bytecode->arg2Long,bytecode->arg2Type));
-        }
-        else if(bytecode->arg2Type==TYPE_STRING)
-        {
-            assignVar->appendAsParameter(bytecode->arg2);
-        }
-        else if(bytecode->arg2Type==TYPE_LONG)
-        {
-            assignVar->appendAsParameter(bytecode->arg2Long);
-        }
-        else if(bytecode->arg2Type==TYPE_DOUBLE)
-        {
-            assignVar->appendAsParameter(bytecode->arg2Double);
-        }
+		if(isTypeVar(bytecode->arg2Type))
+		{
+			assignVar->appendAsParameter(varManager.getVar(bytecode->arg2Long,bytecode->arg2Type));
+		}
+		else if(bytecode->arg2Type==TYPE_STRING)
+		{
+			assignVar->appendAsParameter(bytecode->arg2);
+		}
+		else if(bytecode->arg2Type==TYPE_LONG)
+		{
+			assignVar->appendAsParameter(bytecode->arg2Long);
+		}
+		else if(bytecode->arg2Type==TYPE_DOUBLE)
+		{
+			assignVar->appendAsParameter(bytecode->arg2Double);
+		}
     }
 
     //for(int i=0;i<parameterStack.back()->size();i++)
@@ -500,200 +500,169 @@ void Interpreter::addToVariableAsParameter(AalVariable* assignVar, BytecodeLine*
 */
 bool Interpreter::callUserFunction(AalVariable* returnVar, BytecodeLine* bytecode)
 {
-    BytecodeLine* tempLine;
     int currLineBefore=currLine;
     if(bytecode->arg1Type==TYPE_LONG)
     {
-        currLine=bytecode->arg1Long;
+		currLine=bytecode->arg1Long;
     }
     else
     {
         privateClassTmpString1=STR_FUNC_PREFIX;
         privateClassTmpString1+=bytecode->arg1;
-        auto it=parser.jmpLabels.find(privateClassTmpString1);
-        if(it!=parser.jmpLabels.end())
-        {
-            currLine=it->second;
-            bytecode->arg1Type=TYPE_LONG;
-            bytecode->arg1Long=it->second;
-        }
-        else
+		auto it=parser.jmpLabels.find(privateClassTmpString1);
+		if(it!=parser.jmpLabels.end())
+		{
+			currLine=it->second;
+			bytecode->arg1Type=TYPE_LONG;
+			bytecode->arg1Long=it->second;
+		}
+		else
         {
             bytecode->commandType=TOK_STANDARD_FUNC;
             return false;
         }
     }
 
-    AalVariable* parameterVar=allocator.allocateAalVar();
-    if(isTypeVar(bytecode->arg2Type))
-    {
-        AalVariable* passedVar=varManager.getVar(bytecode->arg2Long, bytecode->arg2Type);
+	AalVariable* parameterVar=allocator.allocateAalVar();
+	if(isTypeVar(bytecode->arg2Type))
+	{
+		AalVariable* passedVar=varManager.getVar(bytecode->arg2Long, bytecode->arg2Type);
 
-        if(passedVar->arrayInfo!=nullptr || passedVar->getArgumentCount()<2)
-        {
-            parameterVar->appendAsParameter(passedVar);
-        }
-        else
-        {
-            parameterVar->makePointTo(passedVar);
-        }
+		if(passedVar->arrayInfo!=nullptr || passedVar->getArgumentCount()<2)
+		{
+			parameterVar->appendAsParameter(passedVar);
+		}
+		else
+		{
+			parameterVar->makePointTo(passedVar);
+		}
 
-    }
-    else if(bytecode->arg2Type!=TYPE_UNKNOWN)
-    {
-        if(bytecode->arg2Type==TYPE_LONG)
-        {
-            parameterVar->appendAsParameter(bytecode->arg2Long);
-        }
-        else if(bytecode->arg2Type==TYPE_DOUBLE)
-        {
-            parameterVar->appendAsParameter(bytecode->arg2Double);
-        }
-        else
-        {
-            parameterVar->appendAsParameter(bytecode->arg2);
-        }
-    }
+	}
+	else if(bytecode->arg2Type!=TYPE_UNKNOWN)
+	{
+		if(bytecode->arg2Type==TYPE_LONG)
+		{
+			parameterVar->appendAsParameter(bytecode->arg2Long);
+		}
+		else if(bytecode->arg2Type==TYPE_DOUBLE)
+		{
+			parameterVar->appendAsParameter(bytecode->arg2Double);
+		}
+		else
+		{
+			parameterVar->appendAsParameter(bytecode->arg2);
+		}
+	}
 
 
     //parameterVar->printVarRecursive();
 
     varManager.enterFunction(currLineBefore);
     int cLines=(int)parser.parsedLinesVector.size();
-    int currIndex=0;
-    Message msg;
-    Window* currWindow;
-    unsigned int iterations=0;
+	int currIndex=0;
     while(currLine<cLines)
     {
-        iterations++;
-        if((iterations & 15) == 0 && ui->msgAvailable>0)
-        {
-            for(currWindow=ui->getNextWindow(); currWindow!=nullptr; currWindow=ui->getNextWindow())
-            {
-                if(ui->popMessageForWindow(currWindow,msg)==true)
-                {
-                    if(msg.action!=nullptr)
-                    {
-                        // call function
-                        // std::cout<<"Clicked: "<<msg.currentEvent<<" "<<*((std::string*)msg.action)<<std::endl;
-                        privateClassTmpString1 = hasher.oneWayFunction(*((std::string*)msg.action));
-                        tempLine=new BytecodeLine;
-                        tempLine->type=LINE_COMMAND;
-                        tempLine->commandType=TOK_FUNC;
-                        tempLine->arg1=privateClassTmpString1;
-                        tempLine->arg1Type=TYPE_STRING;
-                        callUserFunction(nullptr,tempLine);
-                        delete tempLine;
-                    }
-                }
-            }
-        }
+		bytecode=parser.parsedLinesVector[currLine];
+		#if DEBUG > 0
+            std::cout<<"["<<currLine<<"] "<<bytecode->type<<" "<<bytecode->assignVar<<" "<<parameterVar<<std::endl;
+		#endif // DEBUG
 
-        bytecode=parser.parsedLinesVector[currLine];
-#if DEBUG > 0
-        std::cout<<"["<<currLine<<"] "<<bytecode->type<<" "<<bytecode->assignVar<<" "<<parameterVar<<std::endl;
-#endif // DEBUG
-
-        //varManager.printVars();
+		//varManager.printVars();
         if(parameterVar==nullptr)
-        {
-            if(bytecode->type!=LINE_RET)
-            {
-                if(bytecode->arg1!=STR_PARAM)
-                {
-                    interpretLine(bytecode);
-                }
-            }
-            else
-            {
-                // set return value
-                if(returnVar!=nullptr)
-                {
-                    if(isTypeVar(bytecode->arg1Type))
-                    {
-                        AalVariable *tmpReturnVar=varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
-                        returnVar->setValue(tmpReturnVar);
-                    }
-                    else if(bytecode->arg1Type!=TYPE_UNKNOWN)
-                    {
-                        if(bytecode->arg1Type==TYPE_LONG)
-                        {
-                            returnVar->setValue(bytecode->arg1Long,TYPE_LONG);
-                        }
-                        else if(bytecode->arg1Type==TYPE_DOUBLE)
-                        {
-                            returnVar->setValue(bytecode->arg1Double,TYPE_DOUBLE);
-                        }
-                        else if(bytecode->arg1Type==TYPE_STRING)
-                        {
-                            returnVar->setValue(bytecode->arg1,TYPE_STRING);
-                        }
-                    }
-                }
-                varManager.leaveFunction(currLine);
-                break;
-            }
-        }
+		{
+			if(bytecode->type!=LINE_RET)
+			{
+				if(bytecode->arg1!=STR_PARAM)
+				{
+					interpretLine(bytecode);
+				}
+			}
+			else
+			{
+				// set return value
+				if(isTypeVar(bytecode->arg1Type))
+				{
+					AalVariable *tmpReturnVar=varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
+					returnVar->setValue(tmpReturnVar);
+				}
+				else if(bytecode->arg1Type!=TYPE_UNKNOWN)
+				{
+					if(bytecode->arg1Type==TYPE_LONG)
+					{
+						returnVar->setValue(bytecode->arg1Long,TYPE_LONG);
+					}
+					else if(bytecode->arg1Type==TYPE_DOUBLE)
+					{
+						returnVar->setValue(bytecode->arg1Double,TYPE_DOUBLE);
+					}
+					else if(bytecode->arg1Type==TYPE_STRING)
+					{
+						returnVar->setValue(bytecode->arg1,TYPE_STRING);
+					}
+				}
+				varManager.leaveFunction(currLine);
+				break;
+			}
+		}
         else if(bytecode->type==LINE_ENDPARAM && parameterVar!=nullptr)
-        {
-            allocator.recycleAalVar(parameterVar);
-            parameterVar=nullptr;
-        }
-        else if(bytecode->arg1==STR_PARAM)
-        {
-            //std::cout<<"varssign: "<<bytecode->assignVarLong<<std::endl;
-            AalVariable* assignVar = varManager.getVar(bytecode->assignVarLong, TYPE_VARIABLE,true);
-            if(bytecode->assignVarIsPointer==true)
-            {
-                switch(parameterVar->getType(currIndex))
-                {
-                case TYPE_STRING:
-                    assignVar->setValue(parameterVar->getStringValue(currIndex),TYPE_STRING,0);
-                    break;
-                case TYPE_LONG:
-                    assignVar->setValue(parameterVar->getLongValue(currIndex),TYPE_LONG,0);
-                    break;
-                case TYPE_DOUBLE:
-                    assignVar->setValue(parameterVar->getDoubleValue(currIndex),TYPE_DOUBLE,0);
-                    break;
-                case TYPE_VARIABLE:
-                    assignVar->makePointTo(parameterVar->getVariablePointer(currIndex));
-                    break;
-                default:
-                    break;
-                }
-            }
-            else
-            {
-                switch(parameterVar->getType(currIndex))
-                {
-                case TYPE_STRING:
-                    assignVar->setValue(parameterVar->getStringValue(currIndex),TYPE_STRING,0);
-                    break;
-                case TYPE_LONG:
-                    assignVar->setValue(parameterVar->getLongValue(currIndex),TYPE_LONG,0);
-                    break;
-                case TYPE_DOUBLE:
-                    assignVar->setValue(parameterVar->getDoubleValue(currIndex),TYPE_DOUBLE,0);
-                    break;
-                case TYPE_VARIABLE:
-                    assignVar->setValue(parameterVar->getVariablePointer(currIndex),0,0);
-                    break;
-                default:
-                    break;
-                }
-            }
+		{
+			allocator.recycleAalVar(parameterVar);
+			parameterVar=nullptr;
+		}
+		else if(bytecode->arg1==STR_PARAM)
+		{
+			//std::cout<<"varssign: "<<bytecode->assignVarLong<<std::endl;
+			AalVariable* assignVar = varManager.getVar(bytecode->assignVarLong, TYPE_VARIABLE,true);
+			if(bytecode->assignVarIsPointer==true)
+			{
+				switch(parameterVar->getType(currIndex))
+				{
+					case TYPE_STRING:
+						assignVar->setValue(parameterVar->getStringValue(currIndex),TYPE_STRING,0);
+						break;
+					case TYPE_LONG:
+						assignVar->setValue(parameterVar->getLongValue(currIndex),TYPE_LONG,0);
+						break;
+					case TYPE_DOUBLE:
+						assignVar->setValue(parameterVar->getDoubleValue(currIndex),TYPE_DOUBLE,0);
+						break;
+					case TYPE_VARIABLE:
+						assignVar->makePointTo(parameterVar->getVariablePointer(currIndex));
+						break;
+					default:
+						break;
+				}
+			}
+			else
+			{
+				switch(parameterVar->getType(currIndex))
+				{
+					case TYPE_STRING:
+						assignVar->setValue(parameterVar->getStringValue(currIndex),TYPE_STRING,0);
+						break;
+					case TYPE_LONG:
+						assignVar->setValue(parameterVar->getLongValue(currIndex),TYPE_LONG,0);
+						break;
+					case TYPE_DOUBLE:
+						assignVar->setValue(parameterVar->getDoubleValue(currIndex),TYPE_DOUBLE,0);
+						break;
+					case TYPE_VARIABLE:
+						assignVar->setValue(parameterVar->getVariablePointer(currIndex),0,0);
+						break;
+					default:
+						break;
+				}
+			}
 
-            //std::cout<<"param: "<<assignVar->getStringValue()<<" "<<parameterVar->getStringValue()<<std::endl;
-            currIndex++;
-            if(parameterVar->getArgumentCount() <= (unsigned)currIndex && parameterVar!=nullptr)
-            {
-                allocator.recycleAalVar(parameterVar);
-                parameterVar=nullptr;
-            }
-        }
-        currLine++;
+			//std::cout<<"param: "<<assignVar->getStringValue()<<" "<<parameterVar->getStringValue()<<std::endl;
+			currIndex++;
+			if(parameterVar->getArgumentCount() <= (unsigned)currIndex && parameterVar!=nullptr)
+			{
+				allocator.recycleAalVar(parameterVar);
+				parameterVar=nullptr;
+			}
+		}
+		currLine++;
     }
     return true;
 }
@@ -711,15 +680,15 @@ bool Interpreter::callStandardFunction(AalVariable* returnVar, BytecodeLine* byt
     AalVariable* parameterVar=allocator.allocateAalVar();
     if(isTypeVar(bytecode->arg2Type))
     {
-        AalVariable* passedVar=varManager.getVar(bytecode->arg2Long, bytecode->arg2Type);
-        if(passedVar->arrayInfo!=nullptr || passedVar->getArgumentCount()<2)
-        {
-            parameterVar->appendAsParameter(passedVar);
-        }
-        else
-        {
-            parameterVar->makePointTo(passedVar);
-        }
+		AalVariable* passedVar=varManager.getVar(bytecode->arg2Long, bytecode->arg2Type);
+		if(passedVar->arrayInfo!=nullptr || passedVar->getArgumentCount()<2)
+		{
+			parameterVar->appendAsParameter(passedVar);
+		}
+		else
+		{
+			parameterVar->makePointTo(passedVar);
+		}
     }
     else if(bytecode->arg2Type!=TYPE_UNKNOWN)
     {
@@ -856,7 +825,7 @@ void Interpreter::interpretCommand(BytecodeLine* bytecode)
     }
     break;
     case TOK_COMP_EQINCASE:
-        extractValues(bytecode, privateClassType, privateClassTmpDouble1, privateClassTmpDouble2, privateClassTmpLong1, privateClassTmpLong2, privateClassTmpString1, privateClassTmpString2);
+		extractValues(bytecode, privateClassType, privateClassTmpDouble1, privateClassTmpDouble2, privateClassTmpLong1, privateClassTmpLong2, privateClassTmpString1, privateClassTmpString2);
         switch(privateClassType)
         {
         case TYPE_DOUBLE:
@@ -897,7 +866,7 @@ void Interpreter::interpretCommand(BytecodeLine* bytecode)
 
         break;
     case TOK_COMP_EQCASE:
-        extractValues(bytecode, privateClassType, privateClassTmpDouble1, privateClassTmpDouble2, privateClassTmpLong1, privateClassTmpLong2, privateClassTmpString1, privateClassTmpString2);
+		extractValues(bytecode, privateClassType, privateClassTmpDouble1, privateClassTmpDouble2, privateClassTmpLong1, privateClassTmpLong2, privateClassTmpString1, privateClassTmpString2);
         switch(privateClassType)
         {
         case TYPE_DOUBLE:
@@ -1022,7 +991,7 @@ void Interpreter::interpretCommand(BytecodeLine* bytecode)
         }
         break;
     case TOK_COMP_NOTEQ:
-        extractValues(bytecode, privateClassType, privateClassTmpDouble1, privateClassTmpDouble2, privateClassTmpLong1, privateClassTmpLong2, privateClassTmpString1, privateClassTmpString2);
+		extractValues(bytecode, privateClassType, privateClassTmpDouble1, privateClassTmpDouble2, privateClassTmpLong1, privateClassTmpLong2, privateClassTmpString1, privateClassTmpString2);
         switch(privateClassType)
         {
         case TYPE_DOUBLE:
@@ -1091,7 +1060,7 @@ void Interpreter::interpretCommand(BytecodeLine* bytecode)
         break;
     case TOK_BRACKET_ARRAY_CREATION:
         assignVar->clear();
-    // Notice missing break, this was done on purpose!
+        // Notice missing break, this was done on purpose!
     case TOK_BRACKET_ARRAY_APPEND:
         extractLongsForOperations(bytecode, privateClassTmpLong1);
         assignVar->appendDimension(privateClassTmpLong1);
@@ -1120,40 +1089,28 @@ void Interpreter::interpretCommand(BytecodeLine* bytecode)
 void Interpreter::interpretAllLines()
 {
     Window* currWindow;
-    BytecodeLine tempLine;
     Message msg;
     ui->startAsyncMessageUpdate();
-
     currLine=0;
     int cLines=(int)parser.parsedLinesVector.size();
-    unsigned int iterations=0;
     while(currLine<cLines)
     {
-        if((iterations & 15) == 0 && ui->msgAvailable>0)
+        if(ui->msgAvailable>0)
         {
-            for(currWindow=ui->getNextWindow(); currWindow!=nullptr; currWindow=ui->getNextWindow())
+            /*Window* win=ui->getNextWindow();
+            while(win!=nullptr)
             {
-                if(ui->popMessageForWindow(currWindow,msg)==true)
+                if(ui->popMessageForWindow(win,msg)==true)
                 {
-                    if(msg.action!=nullptr)
-                    {
-                        // call function
-                        privateClassTmpString1 = hasher.oneWayFunction(*((std::string*)msg.action));
-                        tempLine.type=LINE_COMMAND;
-                        tempLine.commandType=TOK_FUNC;
-                        tempLine.arg1=privateClassTmpString1;
-                        tempLine.arg1Type=TYPE_STRING;
-                        callUserFunction(nullptr,&tempLine);
-                    }
+                    // call function
                 }
-            }
+            }*/
         }
-#if DEBUG > 0
-        std::cout<<"["<<currLine<<"] "<<parser.parsedLinesVector[currLine]->type<<" "<<parser.parsedLinesVector[currLine]->assignVar<<std::endl;
-#endif // DEBUG
+        #if DEBUG > 0
+            std::cout<<"["<<currLine<<"] "<<parser.parsedLinesVector[currLine]->type<<" "<<parser.parsedLinesVector[currLine]->assignVar<<std::endl;
+		#endif // DEBUG
         interpretLine(parser.parsedLinesVector[currLine]);
         currLine++;
-        iterations++;
     }
 }
 
@@ -1208,30 +1165,8 @@ void Interpreter::interpretLine(BytecodeLine* bytecode)
         break;
     case LINE_TRUE_JMP:
     {
-        bool isJmpTrue=false;
-        AalVariable* arg1;
-        if(isTypeVar(bytecode->arg1Type))
-        {
-            AalVariable* arg1 = varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
-            isJmpTrue=arg1->isTrue();
-        }
-        else
-        {
-            if(bytecode->arg1Type==TYPE_LONG)
-            {
-                isJmpTrue=(bytecode->arg1Long>0);
-            }
-            else if(bytecode->arg1Type==TYPE_DOUBLE)
-            {
-                isJmpTrue=(bytecode->arg1Double>0);
-            }
-            else if(bytecode->arg1Type==TYPE_STRING)
-            {
-                isJmpTrue=(bytecode->arg1.size()>0);
-            }
-        }
-
-        if(isJmpTrue)
+        AalVariable* arg1 = varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
+        if(arg1->isTrue())
         {
             if(bytecode->arg2Type==TYPE_LONG)
             {
@@ -1250,30 +1185,8 @@ void Interpreter::interpretLine(BytecodeLine* bytecode)
     break;
     case LINE_FALSE_JMP:
     {
-        bool isJmpFalse=false;
-        AalVariable* arg1;
-        if(isTypeVar(bytecode->arg1Type))
-        {
-            AalVariable* arg1 = varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
-            isJmpFalse=arg1->isFalse();
-        }
-        else
-        {
-            if(bytecode->arg1Type==TYPE_LONG)
-            {
-                isJmpFalse=(bytecode->arg1Long<=0);
-            }
-            else if(bytecode->arg1Type==TYPE_DOUBLE)
-            {
-                isJmpFalse=(bytecode->arg1Double<=0);
-            }
-            else if(bytecode->arg1Type==TYPE_STRING)
-            {
-                isJmpFalse=(bytecode->arg1.size()==0);
-            }
-        }
-
-        if(isJmpFalse)
+        AalVariable* arg1 = varManager.getVar(bytecode->arg1Long, bytecode->arg1Type);
+        if(arg1->isFalse())
         {
             if(bytecode->arg2Type==TYPE_LONG)
             {
@@ -1301,17 +1214,7 @@ void Interpreter::interpretLine(BytecodeLine* bytecode)
         break;
     case LINE_RET:
         varManager.leaveFunction(currLine);
-        break;
-    case LINE_USING:
-        if(bytecode->arg1==STR_E_ONEWAYHASHER)
-        {
-            hasher.e=std::stoll(bytecode->arg2);
-        }
-        else if(bytecode->arg1==STR_N_ONEWAYHASHER)
-        {
-            hasher.n=std::stoll(bytecode->arg2);
-        }
-        break;
+		break;
     default:
         break;
     }

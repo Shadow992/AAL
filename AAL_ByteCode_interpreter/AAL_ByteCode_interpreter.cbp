@@ -25,6 +25,7 @@
 				<Compiler>
 					<Add option="-O3" />
 					<Add directory="include" />
+					<Add directory="../AAL_Shared/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -39,28 +40,46 @@
 			<Add option="-fexceptions" />
 			<Add directory="include" />
 		</Compiler>
+		<Unit filename="../AAL_Shared/include/DynamicBitSet.h" />
+		<Unit filename="../AAL_Shared/include/LookUpTable.hpp" />
+		<Unit filename="../AAL_Shared/include/OneWayHasher.h" />
+		<Unit filename="../AAL_Shared/include/TokenTypes.h" />
+		<Unit filename="../AAL_Shared/src/DynamicBitSet.cpp" />
+		<Unit filename="../AAL_Shared/src/OneWayHasher.cpp" />
 		<Unit filename="include/AalVariable.h" />
 		<Unit filename="include/AllocationHelper.h" />
 		<Unit filename="include/BytecodeParser.h" />
+		<Unit filename="include/ClassPrototypes.h" />
+		<Unit filename="include/Control.h" />
 		<Unit filename="include/Hashtable.h" />
 		<Unit filename="include/Image.h" />
+		<Unit filename="include/InternalClassWrapper.h" />
 		<Unit filename="include/Interpreter.h" />
 		<Unit filename="include/StandardFunctions.h" />
-		<Unit filename="include/TokenTypes.h" />
 		<Unit filename="include/UnitTest.h" />
+		<Unit filename="include/UserInterface.h" />
 		<Unit filename="include/VariableManagement.h" />
+		<Unit filename="include/Window.h" />
 		<Unit filename="include/commonFuncs.h" />
 		<Unit filename="include/defines.h" />
 		<Unit filename="konzepte.txt" />
+		<Unit filename="other/WindowsScheme.xml" />
+		<Unit filename="other/resources.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="src/AalVariable.cpp" />
 		<Unit filename="src/AllocationHelper.cpp" />
 		<Unit filename="src/BytecodeParser.cpp" />
+		<Unit filename="src/Control.cpp" />
 		<Unit filename="src/Hashtable.cpp" />
 		<Unit filename="src/Image.cpp" />
+		<Unit filename="src/InternalClassWrapper.cpp" />
 		<Unit filename="src/Interpreter.cpp" />
 		<Unit filename="src/StandardFunctions.cpp" />
 		<Unit filename="src/UnitTest.cpp" />
+		<Unit filename="src/UserInterface.cpp" />
 		<Unit filename="src/VariableManagement.cpp" />
+		<Unit filename="src/Window.cpp" />
 		<Unit filename="src/commonFuncs.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>

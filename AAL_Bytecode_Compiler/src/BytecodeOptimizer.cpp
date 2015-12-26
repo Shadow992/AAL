@@ -10,6 +10,12 @@ BytecodeOptimizer::~BytecodeOptimizer()
     //dtor
 }
 
+/**
+ *  \brief This function replaces all jump labels in AAL-Bytecode with the corresponding line number
+ *  
+ *  \param parsedLines Parsed AAL-Bytecode to remove jmp labels from
+ *  \param jmpLabels Map of all found labels and their line number in code
+ */
 void BytecodeOptimizer::removeJmpLabels(std::list<BytecodeLine*>& parsedLines, std::map<std::string, int>& jmpLabels)
 {
 	#if SHOW_TIMINGS == 1

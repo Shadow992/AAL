@@ -1,11 +1,13 @@
 #ifndef INTERPRETER_H
 #define INTERPRETER_H
 
+#include "ClassPrototypes.h"
 #include "TokenTypes.h"
 #include "commonFuncs.h"
 #include "defines.h"
 #include "BytecodeParser.h"
 #include "VariableManagement.h"
+#include "UserInterface.h"
 #include "StandardFunctions.h"
 
 #include <map>
@@ -18,11 +20,16 @@
 
 #include "AalVariable.h"
 #include "AllocationHelper.h"
+#include "OneWayHasher.h"
 
 #include <chrono>
 
+
+
 const std::string STR_PARAM="@param";
 const std::string STR_FUNC_PREFIX="_func_";
+const std::string STR_E_ONEWAYHASHER="e";
+const std::string STR_N_ONEWAYHASHER="n";
 
 /**
 * \brief Class used for interpreting AAL bytecode
@@ -46,10 +53,10 @@ public:
     bool callUserFunction(AalVariable* assignVar, BytecodeLine* bytecode);
     bool callStandardFunction(AalVariable* returnVar, BytecodeLine* bytecode);
 
+    UserInterface* ui;
 private:
     VariableManagement varManager;
-
-    StandardFunctions aalStandardFunctions;
+    StandardFunctions* aalStandardFunctions;
 
     std::vector<AalVariable*> returnValues;
 
@@ -69,6 +76,7 @@ private:
     std::string privateClassTmpString1;
     std::string privateClassTmpString2;
 
+    OneWayHasher hasher;
 };
 
 

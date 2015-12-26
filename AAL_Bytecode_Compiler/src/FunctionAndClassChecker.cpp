@@ -9,6 +9,17 @@ FunctionAndClassChecker::FunctionAndClassChecker()
 	knownFunctions["ubound"]=true;
 	knownFunctions["sizeof"]=true;
     knownFunctions["charat"]=true;
+    knownFunctions["sleep"]=true;
+
+    knownFunctions["createwindow"]=true;
+    knownFunctions["createbutton"]=true;
+    knownFunctions["createlabel"]=true;
+    knownFunctions["createcheckbox"]=true;
+    knownFunctions["createinputbox"]=true;
+    knownFunctions["setonevent"]=true;
+    knownFunctions["readtext"]=true;
+    knownFunctions["settext"]=true;
+    knownFunctions["ischecked"]=true;
 
     knownFunctions["strlen"]=true;
     knownFunctions["strsubstr"]=true;

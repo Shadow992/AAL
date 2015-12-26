@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "commonFuncs.h"
 #include "TokenTypes.h"
+#include "InternalClassWrapper.h"
 
 #include <string.h>
 #include <string>
@@ -64,7 +65,7 @@ class AalVariable
 		void clearValues();
         void* getVoidPointer(const int idx);
 
-        std::shared_ptr<void>* getSharedPointer(int idxDest);
+        std::shared_ptr<InternalClassWrapper>* getSharedPointer(int idxDest);
 		void construct(char type=TYPE_STRING);
         void makePointTo(AalVariable* var);
 

@@ -6,15 +6,27 @@ StandardFunctions::StandardFunctions()
     // Notice that functions MUST be lowercase (to enable case insensitive searching)
     functionMap["consoleread"]=consoleRead;
     functionMap["consolewrite"]=consoleWrite;
-	functionMap["sizeof"]=Ubound;
-	functionMap["ubound"]=Ubound;
+    functionMap["sizeof"]=Ubound;
+    functionMap["ubound"]=Ubound;
     functionMap["time"]=timer;
     functionMap["timer"]=timer;
     functionMap["charat"]=charAt;
+    functionMap["sleep"]=aalSleep;
 
     functionMap["strlen"]=stringLength;
     functionMap["strsubstr"]=stringSubstring;
     functionMap["strcontains"]=stringContains;
+
+    functionMap["createwindow"]=guiCreateWindow;
+    functionMap["createbutton"]=guiCreateButton;
+    functionMap["createlabel"]=guiCreateLabel;
+    functionMap["createcheckbox"]=guiCreateCheckbox;
+    functionMap["createinputbox"]=guiCreateInputbox;
+    functionMap["setonevent"]=guiSetOnEvent;
+
+    functionMap["readtext"]=guiReadText;
+    functionMap["settext"]=guiSetText;
+    functionMap["ischecked"]=guiIsChecked;
 
     functionMap["getwindowhandle"]=getWindowHandle;
     functionMap["clickleftbackground"]=clickLeftBackground;
@@ -29,8 +41,8 @@ StandardFunctions::StandardFunctions()
     functionMap["searchforpixelnexttoposition"]=searchForPixelNextToPosition;
     functionMap["searchforimagenexttoposition"]=searchForImageNextToPosition;
 
-	functionMap["_debug_dump"]=debug_PrintVariableRecursive;
-	functionMap["_debug_showarrayinfo"]=debug_ShowArrayInfo;
+    functionMap["_debug_dump"]=debug_PrintVariableRecursive;
+    functionMap["_debug_showarrayinfo"]=debug_ShowArrayInfo;
 }
 
 StandardFunctions::~StandardFunctions()
@@ -48,13 +60,13 @@ StandardFunctions::~StandardFunctions()
 *
 * \return true if standard function exists, otherwise false
 */
-bool StandardFunctions::executeFunction(std::string functionName,AalVariable* parameterVar, AalVariable* returnVar)
+bool StandardFunctions::executeFunction(std::string functionName,AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     auto it=functionMap.find(functionName);
     if(it!=functionMap.end())
     {
         // found function, call it now
-        it->second(parameterVar,returnVar);
+        it->second(parameterVar,returnVar,currInterpreter);
     }
     else
     {
@@ -75,6 +87,267 @@ AalVariable* getRealParamVar(AalVariable* parameterVar, int i, int& realIndex)
     return parameterVar;
 }
 
+int aalSleep(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    // title,x,y,width,height,style,styleEx
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    int msToSleep=tmpParamVar->getLongValue(realIdx);
+
+    Sleep(msToSleep);
+
+    return 0;
+}
+
+int guiCreateWindow(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    // title,x,y,width,height,style,styleEx
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::string* title=tmpParamVar->getStringPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    int x=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
+    int y=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,3,realIdx);
+    int width=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,4,realIdx);
+    int height=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,5,realIdx);
+    int style=tmpParamVar->getLongValue(realIdx);
+
+    Window* w=currInterpreter->ui->createWindowAsync(*title,x,y,width,height,style);
+
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
+    ptr->reset(new InternalClassWrapper(w,INTERNAL_WINDOW));
+
+    return 0;
+}
+
+int guiCreateButton(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    // window,title,x,y,width,height,style,styleEx
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    std::string* title=tmpParamVar->getStringPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
+    int x=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,3,realIdx);
+    int y=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,4,realIdx);
+    int width=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,5,realIdx);
+    int height=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,6,realIdx);
+    int style=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,7,realIdx);
+    int styleEx=tmpParamVar->getLongValue(realIdx);
+
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Window* w=(Window*)wrapper->classPointer;
+    Control* c=w->createButtonAsync(*title,x,y,width,height,style,styleEx);
+
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
+    ptr->reset(new InternalClassWrapper(c,INTERNAL_CONTROL));
+
+    return 0;
+}
+
+int guiCreateCheckbox(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    // window,title,x,y,width,height,style,styleEx
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    std::string* title=tmpParamVar->getStringPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
+    int x=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,3,realIdx);
+    int y=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,4,realIdx);
+    int width=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,5,realIdx);
+    int height=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,6,realIdx);
+    int style=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,7,realIdx);
+    int styleEx=tmpParamVar->getLongValue(realIdx);
+
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Window* w=(Window*)wrapper->classPointer;
+    Control* c=w->createCheckboxAsync(*title,x,y,width,height,style,styleEx);
+
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
+    ptr->reset(new InternalClassWrapper(c,INTERNAL_CONTROL));
+
+    return 0;
+}
+
+int guiCreateLabel(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    // window,title,x,y,width,height,style,styleEx
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    std::string* title=tmpParamVar->getStringPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
+    int x=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,3,realIdx);
+    int y=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,4,realIdx);
+    int width=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,5,realIdx);
+    int height=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,6,realIdx);
+    int style=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,7,realIdx);
+    int styleEx=tmpParamVar->getLongValue(realIdx);
+
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Window* w=(Window*)wrapper->classPointer;
+    Control* c=w->createLabelAsync(*title,x,y,width,height,style,styleEx);
+
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
+    ptr->reset(new InternalClassWrapper(c,INTERNAL_CONTROL));
+
+    return 0;
+}
+
+int guiCreateInputbox(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    // window,title,x,y,width,height,style,styleEx
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    std::string* title=tmpParamVar->getStringPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
+    int x=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,3,realIdx);
+    int y=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,4,realIdx);
+    int width=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,5,realIdx);
+    int height=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,6,realIdx);
+    int style=tmpParamVar->getLongValue(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,7,realIdx);
+    int styleEx=tmpParamVar->getLongValue(realIdx);
+
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Window* w=(Window*)wrapper->classPointer;
+    Control* c=w->createInputBoxAsync(*title,x,y,width,height,style,styleEx);
+
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
+    ptr->reset(new InternalClassWrapper(c,INTERNAL_CONTROL));
+
+    return 0;
+}
+
+int guiReadText(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Control* c=(Control*)wrapper->classPointer;
+
+    returnVar->setValue(c->getText(),TYPE_STRING);
+
+    return 0;
+}
+
+
+int guiSetText(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Control* c=(Control*)wrapper->classPointer;
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    std::string* newTitle=tmpParamVar->getStringPointer(realIdx);
+
+    c->setText(*newTitle);
+
+    return 0;
+}
+
+
+int guiIsChecked(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Control* c=(Control*)wrapper->classPointer;
+
+    returnVar->setValue((long long)c->isChecked(),TYPE_LONG);
+
+    return 0;
+}
+
+int guiSetOnEvent(AalVariable* parameterVar, AalVariable* returnVar,Interpreter* currInterpreter)
+{
+    int realIdx;
+    AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=tmpParamVar->getSharedPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Control* c=(Control*)wrapper->classPointer;
+
+    tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
+    std::string* onEvent=tmpParamVar->getStringPointer(realIdx);
+
+    tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
+    std::string* onEventFunction=tmpParamVar->getStringPointer(realIdx);
+
+    std::transform(onEvent->begin(),onEvent->end(),onEvent->begin(),tolower);
+    if(*onEvent=="onclick")
+    {
+       c->addOnEventAction(ON_CLICK,new std::string(*onEventFunction));
+    }
+
+    return 0;
+}
+
 void clickMouse(HWND hwnd, int x, int y)
 {
     SendMessage(hwnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM((short)x, (short)y));
@@ -82,7 +355,7 @@ void clickMouse(HWND hwnd, int x, int y)
     SendMessage(hwnd, WM_LBUTTONUP, MK_LBUTTON, MAKELPARAM((short)x, (short)y));
 }
 
-int stringContains(AalVariable* parameterVar, AalVariable* returnVar)
+int stringContains(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -107,7 +380,7 @@ int stringContains(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int stringSubstring(AalVariable* parameterVar, AalVariable* returnVar)
+int stringSubstring(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -124,7 +397,7 @@ int stringSubstring(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int stringLength(AalVariable* parameterVar, AalVariable* returnVar)
+int stringLength(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -135,7 +408,7 @@ int stringLength(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int clickLeftBackground(AalVariable* parameterVar, AalVariable* returnVar)
+int clickLeftBackground(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     // Pixel* searchPixelNextToPosition(int x, int y, unsigned char red,unsigned char green,unsigned char blue, unsigned char variance);
     int realIdx;
@@ -143,20 +416,20 @@ int clickLeftBackground(AalVariable* parameterVar, AalVariable* returnVar)
     int x=tmpParamVar->getLongValue(realIdx);
     tmpParamVar=getRealParamVar(parameterVar,2,realIdx);
     int y=tmpParamVar->getLongValue(realIdx);
-    
-	tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
-	HWND arg0=(HWND)tmpParamVar->getLongValue(realIdx);
-	if(!IsWindow(arg0))
-	{
-		arg0=nullptr;
-	}
-    
+
+    tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
+    HWND arg0=(HWND)tmpParamVar->getLongValue(realIdx);
+    if(!IsWindow(arg0))
+    {
+        arg0=nullptr;
+    }
+
     clickMouse(arg0,x,y);
 
     return 0;
 }
 
-int searchForPixelNextToPosition(AalVariable* parameterVar, AalVariable* returnVar)
+int searchForPixelNextToPosition(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     // Pixel* searchPixelNextToPosition(int x, int y, unsigned char red,unsigned char green,unsigned char blue, unsigned char variance);
     int realIdx;
@@ -166,14 +439,17 @@ int searchForPixelNextToPosition(AalVariable* parameterVar, AalVariable* returnV
         return 1;
     }
 
-    std::shared_ptr<void>* img=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(0);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* img=(Image*)wrapper->classPointer;
+
     long long args[6];
-    for(unsigned int i=1;i<parameterVar->getValueSize() && i < 7;i++)
+    for(unsigned int i=1; i<parameterVar->getValueSize() && i < 7; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-1] = tmpParamVar->getLongValue(realIdx);
     }
-    Pixel* tmpPixel=((Image*)img->get())->searchPixelNextToPosition(args[0],args[1],args[2],args[3],args[4],args[5]);
+    Pixel* tmpPixel=img->searchPixelNextToPosition(args[0],args[1],args[2],args[3],args[4],args[5]);
 
     AalVariable* tmpVar=allocator.allocateAalVar();
     tmpVar->appendDimension(2);
@@ -196,7 +472,7 @@ int searchForPixelNextToPosition(AalVariable* parameterVar, AalVariable* returnV
     return 0;
 }
 
-int saveImage(AalVariable* parameterVar, AalVariable* returnVar)
+int saveImage(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -204,15 +480,17 @@ int saveImage(AalVariable* parameterVar, AalVariable* returnVar)
     {
         return 1;
     }
-    std::shared_ptr<void>* img=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* img=(Image*)wrapper->classPointer;
 
     tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
-    ((Image*)img->get())->saveAsBMP(tmpParamVar->getStringValue(realIdx));
+    img->saveAsBMP(tmpParamVar->getStringValue(realIdx));
 
     return 0;
 }
 
-int searchForImageNextToPosition(AalVariable* parameterVar, AalVariable* returnVar)
+int searchForImageNextToPosition(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     // searchForImageNextToPosition(int x, int y, const Image& searchImage, unsigned char variance);
     int realIdx;
@@ -221,23 +499,28 @@ int searchForImageNextToPosition(AalVariable* parameterVar, AalVariable* returnV
     {
         return 1;
     }
-    std::shared_ptr<void>* imgSrc=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* imgSrc=(Image*)wrapper->classPointer;
 
     tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
     if(tmpParamVar->getType(realIdx)!=TYPE_INTERNAL_CLASS)
     {
         return 2;
     }
-    std::shared_ptr<void>* imgSearch=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    wrapper=internalPtr->get();
+    Image* imgSearch=(Image*)wrapper->classPointer;
 
 
     long long args[3];
-    for(unsigned int i=2;i<parameterVar->getValueSize() && i < 5;i++)
+    for(unsigned int i=2; i<parameterVar->getValueSize() && i < 5; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-2] = tmpParamVar->getLongValue(realIdx);
     }
-    Pixel* tmpPixel=((Image*)imgSrc->get())->searchForImageNextToPosition(args[0],args[1],*((Image*)imgSearch->get()),args[2]);
+
+    Pixel* tmpPixel=imgSrc->searchForImageNextToPosition(args[0],args[1],*imgSearch,args[2]);
 
     AalVariable* tmpVar=allocator.allocateAalVar();
     tmpVar->appendDimension(2);
@@ -260,7 +543,7 @@ int searchForImageNextToPosition(AalVariable* parameterVar, AalVariable* returnV
     return 0;
 }
 
-int searchForSimilarImage(AalVariable* parameterVar, AalVariable* returnVar)
+int searchForSimilarImage(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     // float findSimilarImageHillClimbing(int startX, int startY,int w, int h,Image& checkImage, int accuracy , float overlap, int &bestX, int &bestY);
     // AAL: searchForSimilarImage(img1,img2, startX, startY, w,  h, accuracy,overlap )
@@ -270,17 +553,22 @@ int searchForSimilarImage(AalVariable* parameterVar, AalVariable* returnVar)
     {
         return 1;
     }
-    std::shared_ptr<void>* imgSrc=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* imgSrc=(Image*)wrapper->classPointer;
 
     tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
     if(tmpParamVar->getType(realIdx)!=TYPE_INTERNAL_CLASS)
     {
         return 2;
     }
-    std::shared_ptr<void>* imgSearch=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+
+    internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    wrapper=internalPtr->get();
+    Image* imgSearch=(Image*)wrapper->classPointer;
 
     long long args[5];
-    for(unsigned int i=2;i<parameterVar->getValueSize() && i < 7;i++)
+    for(unsigned int i=2; i<parameterVar->getValueSize() && i < 7; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-2] = tmpParamVar->getLongValue(realIdx);
@@ -290,7 +578,7 @@ int searchForSimilarImage(AalVariable* parameterVar, AalVariable* returnVar)
     float overlap = tmpParamVar->getDoubleValue(realIdx);
     int bestX;
     int bestY;
-    float bestFitness=((Image*)imgSrc->get())->findSimilarImageHillClimbing(args[0],args[1],args[2],args[3],*((Image*)imgSearch->get()),args[4],overlap,bestX,bestY);
+    float bestFitness=imgSrc->findSimilarImageHillClimbing(args[0],args[1],args[2],args[3],*imgSearch,args[4],overlap,bestX,bestY);
 
     AalVariable* tmpVar=allocator.allocateAalVar();
     tmpVar->appendDimension(3);
@@ -306,7 +594,7 @@ int searchForSimilarImage(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int searchForImage(AalVariable* parameterVar, AalVariable* returnVar)
+int searchForImage(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     // Pixel* searchForImage(int startX, int startY, const Image& searchImage, unsigned char variance);
     int realIdx;
@@ -315,23 +603,26 @@ int searchForImage(AalVariable* parameterVar, AalVariable* returnVar)
     {
         return 1;
     }
-    std::shared_ptr<void>* imgSrc=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* imgSrc=(Image*)wrapper->classPointer;
 
     tmpParamVar=getRealParamVar(parameterVar,1,realIdx);
     if(tmpParamVar->getType(realIdx)!=TYPE_INTERNAL_CLASS)
     {
         return 2;
     }
-    std::shared_ptr<void>* imgSearch=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
-
+    internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    wrapper=internalPtr->get();
+    Image* imgSearch=(Image*)wrapper->classPointer;
 
     long long args[3];
-    for(unsigned int i=2;i<parameterVar->getValueSize() && i < 5;i++)
+    for(unsigned int i=2; i<parameterVar->getValueSize() && i < 5; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-1] = tmpParamVar->getLongValue(realIdx);
     }
-    Pixel* tmpPixel=((Image*)imgSrc->get())->searchForImage(args[0],args[1],*((Image*)imgSearch->get()),args[2]);
+    Pixel* tmpPixel=imgSrc->searchForImage(args[0],args[1],*imgSearch,args[2]);
 
     AalVariable* tmpVar=allocator.allocateAalVar();
     tmpVar->appendDimension(2);
@@ -354,7 +645,7 @@ int searchForImage(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int searchForPixel(AalVariable* parameterVar, AalVariable* returnVar)
+int searchForPixel(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -363,14 +654,17 @@ int searchForPixel(AalVariable* parameterVar, AalVariable* returnVar)
         return 1;
     }
 
-    std::shared_ptr<void>* img=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* img=(Image*)wrapper->classPointer;
+
     long long args[6];
-    for(unsigned int i=1;i<parameterVar->getValueSize() && i < 7;i++)
+    for(unsigned int i=1; i<parameterVar->getValueSize() && i < 7; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-1] = tmpParamVar->getLongValue(realIdx);
     }
-    Pixel* tmpPixel=((Image*)img->get())->searchForPixel(args[0],args[1],args[2],args[3],args[4],args[5]);
+    Pixel* tmpPixel=img->searchForPixel(args[0],args[1],args[2],args[3],args[4],args[5]);
 
     AalVariable* tmpVar=allocator.allocateAalVar();
     tmpVar->appendDimension(2);
@@ -393,7 +687,7 @@ int searchForPixel(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int setPixelColor(AalVariable* parameterVar, AalVariable* returnVar)
+int setPixelColor(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -402,20 +696,23 @@ int setPixelColor(AalVariable* parameterVar, AalVariable* returnVar)
         return 1;
     }
 
-    std::shared_ptr<void>* img=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* img=(Image*)wrapper->classPointer;
+
     long long args[5];
-    for(unsigned int i=1;i<parameterVar->getValueSize() && i < 6;i++)
+    for(unsigned int i=1; i<parameterVar->getValueSize() && i < 6; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-1] = tmpParamVar->getLongValue(realIdx);
     }
 
-    ((Image*)img->get())->setPixelColor(args[0],args[1],args[2],args[3],args[4]);
+    img->setPixelColor(args[0],args[1],args[2],args[3],args[4]);
 
     return 0;
 }
 
-int getPixelColor(AalVariable* parameterVar, AalVariable* returnVar)
+int getPixelColor(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -424,14 +721,17 @@ int getPixelColor(AalVariable* parameterVar, AalVariable* returnVar)
         return 1;
     }
 
-    std::shared_ptr<void>* img=(std::shared_ptr<void>*)tmpParamVar->getVoidPointer(realIdx);
+    std::shared_ptr<InternalClassWrapper>* internalPtr=(std::shared_ptr<InternalClassWrapper>*)tmpParamVar->getVoidPointer(realIdx);
+    InternalClassWrapper* wrapper=internalPtr->get();
+    Image* img=(Image*)wrapper->classPointer;
+
     long long args[2];
-    for(unsigned int i=1;i<parameterVar->getValueSize() && i < 3;i++)
+    for(unsigned int i=1; i<parameterVar->getValueSize() && i < 3; i++)
     {
         tmpParamVar=getRealParamVar(parameterVar,i,realIdx);
         args[i-1] = tmpParamVar->getLongValue(realIdx);
     }
-    Pixel* tmpPixel=((Image*)img->get())->getPixel(args[0],args[1]);
+    Pixel* tmpPixel=img->getPixel(args[0],args[1]);
 
     AalVariable* tmpVar=allocator.allocateAalVar();
     tmpVar->appendDimension(3);
@@ -447,19 +747,20 @@ int getPixelColor(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int loadImageFromBMP(AalVariable* parameterVar, AalVariable* returnVar)
+int loadImageFromBMP(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
-    std::shared_ptr<void>* ptr = returnVar->getSharedPointer(0);
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
 
-    ptr->reset(new Image);
-    ((Image*)ptr->get())->readAndParseBMPFile(tmpParamVar->getStringValue(realIdx));
+    Image* imgPtr=new Image;
+    ptr->reset(new InternalClassWrapper(imgPtr,INTERNAL_IMAGE));
+    imgPtr->readAndParseBMPFile(tmpParamVar->getStringValue(realIdx));
 
     return 0;
 }
 
-int getWindowHandle(AalVariable* parameterVar, AalVariable* returnVar)
+int getWindowHandle(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     int realIdx;
     AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
@@ -475,7 +776,7 @@ int getWindowHandle(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int captureWindow(AalVariable* parameterVar, AalVariable* returnVar)
+int captureWindow(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     HWND arg0;
     if(parameterVar->getValueSize()==0)
@@ -487,22 +788,24 @@ int captureWindow(AalVariable* parameterVar, AalVariable* returnVar)
         int realIdx;
         AalVariable* tmpParamVar=getRealParamVar(parameterVar,0,realIdx);
         arg0=(HWND)tmpParamVar->getLongValue(realIdx);
-        if(!IsWindow(arg0))
+        if(arg0==nullptr || !IsWindow(arg0))
         {
             arg0=nullptr;
         }
     }
 
-    std::shared_ptr<void>* ptr = returnVar->getSharedPointer(0);
-    ptr->reset(new Image);
+    returnVar->printVarRecursive();
+    std::shared_ptr<InternalClassWrapper>* ptr = returnVar->getSharedPointer(0);
+    Image* imgPtr=new Image;
+    ptr->reset(new InternalClassWrapper(imgPtr,INTERNAL_IMAGE));
 
-    ((Image*)ptr->get())->captureWindowFromHandle(arg0);
+    imgPtr->captureWindowFromHandle(arg0);
 
     return 0;
 }
 
 
-int charAt(AalVariable* parameterVar, AalVariable* returnVar)
+int charAt(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     if(parameterVar->getValueSize()>1)
     {
@@ -525,69 +828,69 @@ int charAt(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int debug_PrintVariableRecursive(AalVariable* parameterVar, AalVariable* returnVar)
+int debug_PrintVariableRecursive(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
-	switch(parameterVar->getType(0))
-	{
-		case TYPE_VARIABLE:
-		{
-			AalVariable* arg0=parameterVar->getVariablePointer(0);
-			arg0->printVarRecursive();
-			break;
-		}
-		default:
-			return 1;
-	}
+    switch(parameterVar->getType(0))
+    {
+    case TYPE_VARIABLE:
+    {
+        AalVariable* arg0=parameterVar->getVariablePointer(0);
+        arg0->printVarRecursive();
+        break;
+    }
+    default:
+        return 1;
+    }
 
     return 0;
 }
 
-int debug_ShowArrayInfo(AalVariable* parameterVar, AalVariable* returnVar)
+int debug_ShowArrayInfo(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
-	switch(parameterVar->getType(0))
-	{
-		case TYPE_VARIABLE:
-		{
-			AalVariable* arg0=parameterVar->getVariablePointer(0);
-			if(arg0->arrayInfo==nullptr)
-			{
-				std::cout<<"arrayinfo = nullptr\n";
-			}
-			else
-			{
-				std::cout<<"arrayinfo = {\noverallArraySize="<<arg0->arrayInfo->overallArraySize
-				<<",\n usedAalVarChunks_size="<< arg0->arrayInfo->usedAalVarChunks.size()
-				<<",\n usedValueChunks_size="<< arg0->arrayInfo->usedValueChunks.size()
-				<<",\n usedValueTypeChunks_size="<< arg0->arrayInfo->usedValueTypeChunks.size() <<" \n}\n";
-			}
-			break;
-		}
-		default:
-			return 1;
-	}
+    switch(parameterVar->getType(0))
+    {
+    case TYPE_VARIABLE:
+    {
+        AalVariable* arg0=parameterVar->getVariablePointer(0);
+        if(arg0->arrayInfo==nullptr)
+        {
+            std::cout<<"arrayinfo = nullptr\n";
+        }
+        else
+        {
+            std::cout<<"arrayinfo = {\noverallArraySize="<<arg0->arrayInfo->overallArraySize
+                     <<",\n usedAalVarChunks_size="<< arg0->arrayInfo->usedAalVarChunks.size()
+                     <<",\n usedValueChunks_size="<< arg0->arrayInfo->usedValueChunks.size()
+                     <<",\n usedValueTypeChunks_size="<< arg0->arrayInfo->usedValueTypeChunks.size() <<" \n}\n";
+        }
+        break;
+    }
+    default:
+        return 1;
+    }
 
 
     return 0;
 }
 
-int Ubound(AalVariable* parameterVar, AalVariable* returnVar)
+int Ubound(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
-	switch(parameterVar->getType(0))
-	{
-		case TYPE_VARIABLE:
-		{
-			AalVariable* arg0=parameterVar->getVariablePointer(0);
-			returnVar->setValue((long long)arg0->getValueSize(),TYPE_LONG);
-			break;
-		}
-		default:
-			returnVar->setValue(0LL,TYPE_LONG);
-			return 1;
-	}
+    switch(parameterVar->getType(0))
+    {
+    case TYPE_VARIABLE:
+    {
+        AalVariable* arg0=parameterVar->getVariablePointer(0);
+        returnVar->setValue((long long)arg0->getValueSize(),TYPE_LONG);
+        break;
+    }
+    default:
+        returnVar->setValue(0LL,TYPE_LONG);
+        return 1;
+    }
     return 0;
 }
 
-int consoleRead(AalVariable* parameterVar, AalVariable* returnVar)
+int consoleRead(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     std::string readLine;
     std::cin >> readLine;
@@ -595,29 +898,29 @@ int consoleRead(AalVariable* parameterVar, AalVariable* returnVar)
     return 0;
 }
 
-int consoleWrite(AalVariable* parameterVar, AalVariable* returnVar)
+int consoleWrite(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
-	switch(parameterVar->getType(0))
-	{
-		case TYPE_STRING:
-			std::cout << parameterVar->getStringValue(0);
-			break;
-		case TYPE_LONG:
-			std::cout << parameterVar->getLongValue(0);
-			break;
-		case TYPE_DOUBLE:
-			std::cout << parameterVar->getDoubleValue(0);
-			break;
-		case TYPE_VARIABLE:
-			std::cout << parameterVar->getVariablePointer(0)->getStringValue(0);
-			break;
-		default:
-			break;
-	}
+    switch(parameterVar->getType(0))
+    {
+    case TYPE_STRING:
+        std::cout << parameterVar->getStringValue(0);
+        break;
+    case TYPE_LONG:
+        std::cout << parameterVar->getLongValue(0);
+        break;
+    case TYPE_DOUBLE:
+        std::cout << parameterVar->getDoubleValue(0);
+        break;
+    case TYPE_VARIABLE:
+        std::cout << parameterVar->getVariablePointer(0)->getStringValue(0);
+        break;
+    default:
+        break;
+    }
     return 0;
 }
 
-int timer(AalVariable* parameterVar, AalVariable* returnVar)
+int timer(AalVariable* parameterVar, AalVariable* returnVar,Interpreter * currInterpreter)
 {
     if(parameterVar->getArgumentCount()==1 && parameterVar->getLongValue(0)==1)
     {

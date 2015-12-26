@@ -50,6 +50,7 @@ template < typename T > std::string toCompressedString( const T& n )
 	return buf;
 }
 
+bool isRelativelyPrime(unsigned long long a, unsigned long long b);
 bool isTypeVar(const char type);
 bool isValidDouble(const std::string& str);
 bool isNumberDouble(const std::string& number);
