@@ -58,7 +58,7 @@ void extractPreProcess(Token* currToken, std::vector<Token*>& extracted )
  * \param
  *
  */
-void insertIncludes(std::string& code)
+void insertIncludes(std::string& code, const std::string& includeDir)
 {
     std::string preProcessedCode;
     bool preProcessPossible=true;
@@ -126,7 +126,7 @@ void insertIncludes(std::string& code)
 				std::transform(tmpValue.begin(), tmpValue.end(), tmpValue.begin(), ::tolower);
 				if(alreadyIncluded.find(tmpValue)==alreadyIncluded.end())
 				{
-					std::string includeFileContent=readStringFile(tmpValue);
+					std::string includeFileContent=readStringFile(includeDir+tmpValue);
 
 					std::string tmp="#include-once";
 					int foundPos=0;

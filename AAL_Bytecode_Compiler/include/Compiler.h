@@ -23,7 +23,7 @@ class Compiler
     public:
         Compiler();
         virtual ~Compiler();
-        bool compile(std::string code);
+        bool compile(std::string code,const std::string& destFile, const std::string& includeDir);
         void renameVars(Token* currToken,std::map<std::string,int>& renamedVars,int& cRenamedVars);
         std::string getNextTmpVar();
         void compileTokenRecursive(Token* currToken,std::ofstream& outFile,std::vector<std::string>& compiledLines, bool useVector,const std::string& parentAssignVar,int& funcDeclParam);

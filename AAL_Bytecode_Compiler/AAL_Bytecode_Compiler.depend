@@ -2,7 +2,7 @@
 1447445041 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\commonfuncs.cpp
 	"commonFuncs.h"
 
-1441121976 cs.h"
+1447464469 cs.h"
 
 1449772393 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\main.cpp
 	"commonFuncs.h"
@@ -37,7 +37,7 @@
 	"OneWayHasher.cpp"
 	"DynamicBitSet.cpp"
 
-1442858331 tSet.cpp"
+1450989302 tSet.cpp"
 
 1442260513 ptimizer.cpp"
 
@@ -53,22 +53,22 @@
 1447509553 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\tokenizer.cpp
 	"Tokenizer.h"
 
-1440513104 .h"
+1447509553 .h"
 
 1447464368 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\parser.cpp
 	"Parser.h"
 
-1441049593 
+1440197533 
 
 1449776368 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\syntaxvalidator.cpp
 	"SyntaxValidator.h"
 
-1441121974 idator.h"
+1449776520 idator.h"
 
 1447464417 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\preprocessor.cpp
 	"PreProcessor.h"
 
-1440513092 sor.h"
+1447464417 sor.h"
 
 1447464368 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\parser.cpp
 	"Parser.h"
@@ -155,7 +155,7 @@
 	<fstream>
 	<algorithm>
 
-1440168788 >
+1440165188 >
 
 1440324530 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\include\functionandclasschecker.h
 	<map>
@@ -170,12 +170,12 @@
 1449407793 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\functionandclasschecker.cpp
 	"FunctionAndClassChecker.h"
 
-1440684686 ndClassChecker.h"
+1451080935 ndClassChecker.h"
 
 1449776351 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\compiler.cpp
 	"Compiler.h"
 
-1443185603 h"
+1450877313 h"
 
 1449254620 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\include\compiler.h
 	<string.h>
@@ -1507,7 +1507,7 @@
 1441049540 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\bytecodeoptimizer.cpp
 	"BytecodeOptimizer.h"
 
-1441053140 ptimizer.h"
+1450877309 ptimizer.h"
 
 1441049604 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\include\bytecodeoptimizer.h
 	"TokenTypes.h"
@@ -1519,7 +1519,7 @@
 	<iostream>
 	"defines.h"
 
-1442846179 "
+1441049604 "
 
 1442842579 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\include\bytecodeparser.h
 	"TokenTypes.h"
@@ -1534,7 +1534,7 @@
 1447361529 source:c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\bytecodeparser.cpp
 	"BytecodeParser.h"
 
-1443095365 arser.h"
+1447361529 arser.h"
 
 1447361529 c:\users\marcel\dropbox\codes c++\aal_bytecode_compiler\src\bytecodeparser.cpp
 	"BytecodeParser.h"
@@ -1845,7 +1845,7 @@
 	<iomanip>
 	<fstream>
 
-1451135322 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\include\defines.h
+1451343209 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\include\defines.h
 	<thread>
 	<mutex>
 	<chrono>
@@ -1901,7 +1901,7 @@
 1451080935 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\functionandclasschecker.cpp
 	"FunctionAndClassChecker.h"
 
-1450989302 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\main.cpp
+1451339837 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\main.cpp
 	"commonFuncs.h"
 	"Token.h"
 	"Tokenizer.h"
@@ -1955,7 +1955,7 @@
 	"Tokenizer.h"
 	"PreProcessor.h"
 
-1440165188 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\include\preprocessor.h
+1451307616 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\include\preprocessor.h
 	<string>
 	<cstring>
 	<vector>
@@ -1966,7 +1966,7 @@
 	<fstream>
 	<algorithm>
 
-1449254620 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\include\compiler.h
+1451307372 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\include\compiler.h
 	<string.h>
 	<vector>
 	<list>
@@ -2032,10 +2032,10 @@
 1449776520 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\syntaxvalidator.cpp
 	"SyntaxValidator.h"
 
-1447464417 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\preprocessor.cpp
+1451343177 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\preprocessor.cpp
 	"PreProcessor.h"
 
-1450877313 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\compiler.cpp
+1451307320 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\compiler.cpp
 	"Compiler.h"
 
 1451080935 c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\functionandclasschecker.cpp
@@ -2063,7 +2063,7 @@
 1447464368 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\parser.cpp
 	"Parser.h"
 
-1447464417 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\preprocessor.cpp
+1451343177 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\preprocessor.cpp
 	"PreProcessor.h"
 
 1449776520 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\syntaxvalidator.cpp
@@ -2079,7 +2079,7 @@
 1450877309 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\bytecodeoptimizer.cpp
 	"BytecodeOptimizer.h"
 
-1450877313 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\compiler.cpp
+1451307320 source:c:\users\marcel\dropbox\codes c++\aal\aal_bytecode_compiler\src\compiler.cpp
 	"Compiler.h"
 
 1442854782 source:c:\users\marcel\dropbox\codes c++\aal\aal_shared\src\dynamicbitset.cpp
@@ -2113,4 +2113,203 @@
 	"DynamicBitSet.h"
 
 1449776751 c:\users\marcel\dropbox\codes c++\aal\aal_shared\include\tokentypes.h
+
+1442858382 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Shared/src/DynamicBitSet.cpp
+	"DynamicBitSet.h"
+	"LookUpTable.hpp"
+
+1442367107 /home/marcel/Dropbox/Codes C++/AAL/AAL_Shared/include/DynamicBitSet.h
+	<cstdint>
+	<iostream>
+	<cstring>
+	<vector>
+	<deque>
+	<iostream>
+	<functional>
+	<algorithm>
+	<iterator>
+
+1442366851 /home/marcel/Dropbox/Codes C++/AAL/AAL_Shared/include/LookUpTable.hpp
+
+1442422696 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Shared/src/OneWayHasher.cpp
+	"OneWayHasher.h"
+
+1442581152 /home/marcel/Dropbox/Codes C++/AAL/AAL_Shared/include/OneWayHasher.h
+	<map>
+	<chrono>
+	<random>
+	<iostream>
+	<algorithm>
+	<cmath>
+	"commonFuncs.h"
+	"DynamicBitSet.h"
+
+1442260926 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/commonFuncs.h
+	"defines.h"
+	<string.h>
+	"TokenTypes.h"
+	"SyntaxValidator.h"
+	"ProblemTypes.h"
+	<sstream>
+	<iomanip>
+	<fstream>
+
+1451135322 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/defines.h
+	<thread>
+	<mutex>
+	<chrono>
+	<windows.h>
+
+1449776751 /home/marcel/Dropbox/Codes C++/AAL/AAL_Shared/include/TokenTypes.h
+
+1440328275 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/SyntaxValidator.h
+	"FunctionAndClassChecker.h"
+	"Token.h"
+	"TokenTypes.h"
+	"ProblemTypes.h"
+	"commonFuncs.h"
+	<map>
+	<vector>
+	<list>
+	<iostream>
+
+1440328130 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/FunctionAndClassChecker.h
+	<map>
+	<algorithm>
+	<string>
+	<stdlib.h>
+	<math.h>
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"Token.h"
+
+1440073730 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/Token.h
+	"TokenTypes.h"
+	<map>
+	<list>
+	<string>
+
+1440629519 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/ProblemTypes.h
+	"TokenTypes.h"
+	"Token.h"
+	<map>
+	<list>
+
+1440333470 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/BytecodeGenerator.cpp
+	"BytecodeGenerator.h"
+
+1441053193 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/BytecodeGenerator.h
+	"Token.h"
+	<stdlib.h>
+	<string>
+
+1450877309 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/BytecodeOptimizer.cpp
+	"BytecodeOptimizer.h"
+
+1441053204 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/BytecodeOptimizer.h
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"BytecodeParser.h"
+	<stdlib.h>
+	<string>
+	<list>
+	<iostream>
+	"defines.h"
+
+1442846179 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/BytecodeParser.h
+	"TokenTypes.h"
+	"commonFuncs.h"
+	<stdlib.h>
+	<string>
+	<list>
+	<vector>
+	<iostream>
+	"defines.h"
+
+1447361529 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/BytecodeParser.cpp
+	"BytecodeParser.h"
+
+1447445041 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/commonFuncs.cpp
+	"commonFuncs.h"
+
+1451080935 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/FunctionAndClassChecker.cpp
+	"FunctionAndClassChecker.h"
+
+1447464255 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/Optimizer.cpp
+	"Optimizer.h"
+
+1440201133 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/Optimizer.h
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"Token.h"
+	<list>
+	<stdlib.h>
+	<math.h>
+	<thread>
+	<mutex>
+
+1447464368 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/Parser.cpp
+	"Parser.h"
+
+1440640335 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/Parser.h
+	<string.h>
+	<vector>
+	<list>
+	<iostream>
+	<stack>
+	"defines.h"
+	"commonFuncs.h"
+	"TokenTypes.h"
+	"SyntaxValidator.h"
+	"Token.h"
+	"Tokenizer.h"
+	"PreProcessor.h"
+
+1440079713 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/Tokenizer.h
+	"TokenTypes.h"
+	"commonFuncs.h"
+	"Token.h"
+	<list>
+	<stdlib.h>
+
+1451307616 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/PreProcessor.h
+	<string>
+	<cstring>
+	<vector>
+	"TokenTypes.h"
+	"Token.h"
+	"commonFuncs.h"
+	<iostream>
+	<fstream>
+	<algorithm>
+
+1449776520 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/SyntaxValidator.cpp
+	"SyntaxValidator.h"
+
+1447464469 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/Token.cpp
+	"Token.h"
+	"commonFuncs.h"
+
+1447509553 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/Tokenizer.cpp
+	"Tokenizer.h"
+
+1451307320 source:/home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/src/Compiler.cpp
+	"Compiler.h"
+
+1451307372 /home/marcel/Dropbox/Codes C++/AAL/AAL_Bytecode_Compiler/include/Compiler.h
+	<string.h>
+	<vector>
+	<list>
+	<iostream>
+	<stack>
+	<algorithm>
+	"commonFuncs.h"
+	"TokenTypes.h"
+	"SyntaxValidator.h"
+	"Token.h"
+	"Tokenizer.h"
+	"PreProcessor.h"
+	"Parser.h"
+	"Optimizer.h"
+	"OneWayHasher.h"
 

@@ -93,7 +93,7 @@ void Compiler::setVarUnused(const std::string& var)
 }
 
 /**
- *  \brief This function renames all variables specified in original AAL-Code (e.g. "$var=10") to a variable which only contains numbers (e.g. "$10") 
+ *  \brief This function renames all variables specified in original AAL-Code (e.g. "$var=10") to a variable which only contains numbers (e.g. "$10")
  *  \param currToken Variable to set to unused
  *  \param renamedVars Variable to set to unused
  *  \param cRenamedVars Number of renamed variables
@@ -966,13 +966,13 @@ void Compiler::writeUsingDirectives(std::ofstream& outFile)
 	outFile<<STR_USING_DIRCETIVE<<" e "<<toString(hasher.e)<<std::endl;
 }
 
-bool Compiler::compile(std::string code)
+bool Compiler::compile(std::string code,const std::string& destFile, const std::string& includeDir)
 {
 #if SHOW_TIMINGS == 1
     auto start = std::chrono::steady_clock::now();
 #endif
 
-    insertIncludes(code);
+    insertIncludes(code,includeDir);
 
 #if SHOW_TIMINGS == 1
     auto end = std::chrono::steady_clock::now();
@@ -1033,9 +1033,9 @@ bool Compiler::compile(std::string code)
     start = std::chrono::steady_clock::now();
 #endif
 
-    remove("out.tmp");
+    remove(destFile.c_str());
     std::vector<std::string> compiledLines;
-    std::ofstream outFile("out.tmp", std::ios::app | std::ios::out);
+    std::ofstream outFile(destFile, std::ios::app | std::ios::out);
 	int funcDeclParam=-1;
 
 	writeUsingDirectives(outFile);

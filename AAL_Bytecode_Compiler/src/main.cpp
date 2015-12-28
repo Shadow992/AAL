@@ -44,17 +44,21 @@ int main( int argc, const char* argv[] )
         //auto startNumbers = std::chrono::steady_clock::now();
     #endif
 
-    std::string toParse=readStringFile("compile.aal1");
-    tmp2.compile(toParse);
+    std::string srcFile=argv[1];
+    std::string destFile=argv[2];
+    std::string includeDir=argv[3];
+    std::string toParse=readStringFile(srcFile);
+    srcFile+=".tmp.bin";
+    tmp2.compile(toParse,srcFile,includeDir);
 
 
-    std::string compiledBytecode=readStringFile("out.tmp");
+    std::string compiledBytecode=readStringFile(srcFile);
     BytecodeParser byteParser;
     byteParser.parseBytecode(compiledBytecode,false);
 
     BytecodeOptimizer byteOptimzer;
     byteOptimzer.removeJmpLabels(byteParser.parsedLines,byteParser.jmpLabels);
-    byteParser.writeToFile("out.aal1.bin",false);
+    byteParser.writeToFile(destFile,false);
 
 
     #if SHOW_TIMINGS == 1

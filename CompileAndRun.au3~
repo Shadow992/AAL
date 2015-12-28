@@ -6,7 +6,7 @@
 #include <WindowsConstants.au3>
 Opt("GUIOnEventMode", 1)
 #Region ### START Koda GUI section ### Form=
-$Form1 = GUICreate("AAL-Helper", 307, 140, 461, 254)
+$Form1 = GUICreate("AAL-Helper", 307, 106, 461, 254)
 GUISetOnEvent($GUI_EVENT_CLOSE, "Form1Close")
 $Button1 = GUICtrlCreateButton("Select File", 8, 72, 91, 25)
 GUICtrlSetOnEvent(-1, "Button1Click")
@@ -48,8 +48,8 @@ Func Button3Click()
 
 	FileDelete(@ScriptDir&"\bin\compile.aal1")
 	FileDelete(@ScriptDir&"\bin\out.aal1.bin")
-	ShellExecuteWait(@ScriptDir&"\bin\compiler_release.bat",'"'&$file&'" "'&@ScriptDir&'\bin\out.aal1.bin" "'&$include&'"',@ScriptDir&"\bin")
-	ShellExecuteWait(@ScriptDir&"\bin\interpreter_release.bat","",@ScriptDir&"\bin")
+	ShellExecuteWait(@ScriptDir&"\bin\compiler_release.bat",'"'&$file&'" "'&@ScriptDir&'\bin\out.aal1.bin"'&$include&'"',@ScriptDir&"\bin")
+	ShellExecuteWait(@ScriptDir&"\bin\interpreter_release.bat",'"'&$file&'" "'&@ScriptDir&'\bin\out.aal1.bin"'&$include&'"',@ScriptDir&"\bin")
 EndFunc   ;==>Button3Click
 
 
@@ -59,8 +59,8 @@ Func Button6Click()
 
 	FileDelete(@ScriptDir&"\bin\compile.aal1")
 	FileDelete(@ScriptDir&"\bin\out.aal1.bin")
-	ShellExecuteWait(@ScriptDir&"\bin\compiler_debug.bat",'"'&$file&'" "'&@ScriptDir&'\bin\out.aal1.bin" "'&$include&'"',@ScriptDir&"\bin")
-	ShellExecuteWait(@ScriptDir&"\bin\interpreter_debug.bat","",@ScriptDir&"\bin")
+	ShellExecuteWait(@ScriptDir&"\bin\compiler_debug.bat",'"'&$file&'" "'&@ScriptDir&'\bin\out.aal1.bin"'&$include&'"',@ScriptDir&"\bin")
+	ShellExecuteWait(@ScriptDir&"\bin\interpreter_debug.bat",'"'&$file&'" "'&@ScriptDir&'\bin\out.aal1.bin"'&$include&'"',@ScriptDir&"\bin")
 EndFunc   ;==>Button6Click
 
 Func Button4Click()

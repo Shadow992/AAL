@@ -8,7 +8,7 @@
 // set it to 4 ...
 // ...
 // set it to 10 for most detailed information
-#define DEBUG 0
+#define DEBUG 1
 
 // if set to 1 to show benchmark times
 #define SHOW_TIMINGS 1
