@@ -4,7 +4,7 @@ Code of Advanced Automation Language (AAL)
 ### What is AAL? ###
 AAL tries to give the possibility to do basic and also complex automation tasks based on an easy syntax and semantic.
 So AAL tries not to be as similar to AutoIt as possible but tries to get the best out of AutoIt and mix it with things that are kind a missing or done worse in AutoIt, e.g.:
-Zitat:
+
 - Missing class support (only possible with UDF and then still quite strange to use)
 - Quite slow
 - Very Easy to decompile and nearly impossible to break existing decompilers
