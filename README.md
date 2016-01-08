@@ -15,7 +15,7 @@ So AAL tries not to be as similar to AutoIt as possible but tries to get the bes
 - Missing possibility to compile as DLL
 
 AAL is open-source and I will try to keep it as long open-source as possible.
-So you can lear from the project. That is also why I tried to document many things as good as possible.
+So you can learn from the project. That is also why I tried to document many things as good as possible.
 You should not only learn from this project, but I am also happy to see people helping together to reach the goal of "being a mighty AutoIt alternative".
 You do not only have to be familar with coding, I am searching for all kind of help.
 
