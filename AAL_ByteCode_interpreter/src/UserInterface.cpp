@@ -273,6 +273,7 @@ LRESULT CALLBACK UserInterface::realWndProc(HWND hWnd, UINT msg, WPARAM wParam, 
                 auto it=messageQueue.find(currentWindow);
                 if(it==messageQueue.end())
                 {
+                    msgSynchronizer->unlock();
                     break;
                 }
                 msgAvailable++;
