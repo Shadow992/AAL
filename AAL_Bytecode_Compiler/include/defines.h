@@ -38,4 +38,14 @@
     #define LPCTSTR const char*
 #endif
 
+#if defined(__GNUC__) || defined(__GNUG__)
+	/* GNU GCC/G++. --------------------------------------------- */
+    #define NO_INLINE __attribute__((noinline))
+#elif defined(_MSC_VER)
+	/* Microsoft Visual Studio. --------------------------------- */
+    #define NO_INLINE __declspec(noinline)
+    #pragma comment(lib, "gdi32.lib")
+    #define USE_ABS_LONG_LONG_PATCH 1
+#endif
+
 #endif // DEFINES_H_INCLUDED

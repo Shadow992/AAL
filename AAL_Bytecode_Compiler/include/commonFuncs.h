@@ -32,8 +32,13 @@ template < typename T > std::string toCompressedString( const T& n )
 	T quotient = n;
 	do
     {
-		buf += chars[ (unsigned int) abs( quotient % 62 ) ];
-		quotient /=  62;
+        #if defined(USE_ABS_LONG_LONG_PATCH)
+        T result=quotient % ((T)62);
+        buf += chars[ (unsigned int) (result < 0 ? -result : result) ];
+        #else
+		buf += chars[ (unsigned int) abs( quotient % ((T)62) ) ];
+		#endif // defined
+		quotient /=  (T)62;
 	} while ( quotient );
 
     if ( n < 0) buf += '-';

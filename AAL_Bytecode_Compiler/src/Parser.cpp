@@ -497,7 +497,7 @@ void Parser::createSyntaxTree(Token* currToken)
 				int checkingPrecedence=getChildTokenPrecedence(openTokens.top());
 				while(!openTokens.empty() && (checkingPrecedence==-1 || checkingPrecedence >= currPrecedence))
 				{
-					// while there are tokens left in openTokens-Stack and (we are processing numbers/etc. or higher or equal precedence operators)
+					// while there are tokens left in openTokens-Stack and (we are processing numbers/etc. of higher or equal precedence operators)
 					if(checkingPrecedence>-1)
 					{
 						// we found operator

@@ -55,10 +55,12 @@ std::string Control::getText()
 
 bool Control::remove()
 {
-
+    // not implemented yet
+    return false;
 }
 
 bool Control::show(bool)
 {
-
+    // not implemented yet
+    return false;
 }

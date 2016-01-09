@@ -121,12 +121,14 @@ Control* Window::createLabel(const std::string& title, int x, int y, int width, 
 
 bool Window::removeControl(Control*)
 {
-
+    // not implemented yet
+    return false;
 }
 
 bool Window::showControl(Control*, bool)
 {
-
+    // not implemented yet
+    return false;
 }
 
 bool Window::popLatestMessage(Message& msg)

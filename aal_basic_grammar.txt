@@ -1,0 +1,261 @@
+%root=
+%mainList
+
+%mainList=
+%CommandList TOK_NEWLINE %mainList
+| %main TOK_NEWLINE %mainList
+| %funcDecl
+
+%funcDecl= 
+TOK_FUNC_DECL TOK_FUNC TOK_BRACKET_ROUND_OPEN [%argList] TOK_BRACKET_ROUND_CLOSE TOK_NEWLINE
+%CommandList
+TOK_ENDFUNC
+
+%argList=
+%argList TOK_PUNCT_COMMA %argList
+| [TOK_BYREF] [TOK_CONST] TOK_VAR
+| [TOK_CONST] [TOK_BYREF] TOK_VAR
+
+%if=
+TOK_IF %Expression [TOK_THEN] TOK_NEWLINE
+%CommandList
+[TOK_ELSEIF %Expression [TOK_THEN] TOK_NEWLINE
+%CommandList]
+[TOK_ELSE TOK_NEWLINE
+%CommandList]
+TOK_ENDIF
+
+%for= 
+TOK_FOR TOK_VAR TOK_ASSIGN %Expression TOK_TO %Expression [TOK_STEP %Expression] TOK_NEWLINE
+%CommandList
+TOK_NEXT
+
+%while=
+TOK_WHILE %Expression TOK_NEWLINE
+%CommandList
+TOK_WEND
+
+%do=
+TOK_DO 
+%CommandList
+TOK_UNTIL %Expression
+
+%array=
+TOK_VAR %dimension
+
+%dimension=
+TOK_BRACKET_ARRAY_OPEN %Expression TOK_BRACKET_ARRAY_CLOSE
+| TOK_BRACKET_ARRAY_OPEN %Expression TOK_BRACKET_ARRAY_CLOSE %dimension
+
+%assign=
+TOK_VAR %assignOp %Expression
+| %array %assignOp %Expression
+
+%assignOp=
+TOK_ASSIGN
+| TOK_ASSIGN_MOD 
+| TOK_ASSIGN_ADD
+| TOK_ASSIGN_SUB
+| TOK_ASSIGN_MUL
+| TOK_ASSIGN_DIV
+| TOK_ASSIGN_SHL
+| TOK_ASSIGN_SHR
+| TOK_ASSIGN_JOIN
+| TOK_ASSIGN_POW
+
+%Expression=
+%Expression %binaryOp %Expression
+| TOK_BRACKET_ROUND_OPEN %Expression TOK_BRACKET_ROUND_CLOSE
+| %operand
+| %unaryLeftOp %Expression
+
+%unaryLeftOp=
+TOK_OP_NOT
+
+%unaryRightOp=
+TOK_OP_DEC
+| TOK_OP_INC
+
+%operand=
+TOK_VAR
+| %array
+| %number
+| %function
+| TOK_TRUE
+| TOK_FALSE
+| TOK_LITERAL
+| TOK_NULL
+
+%function=
+TOK_STANDARD_FUNC TOK_BRACKET_ROUND_OPEN [%paramList] TOK_BRACKET_CLOSE
+| TOK_FUNC TOK_BRACKET_ROUND_OPEN [%paramList] TOK_BRACKET_CLOSE
+
+%paramList=
+%paramList TOK_PUNCT_COMMA %paramList
+| %Expression
+
+%CommandList=
+%Expression [TOK_NEWLINE %CommandList]
+| TOK_VAR %unaryRightOp [TOK_NEWLINE %CommandList]
+| %array %unaryRightOp [TOK_NEWLINE %CommandList]
+| %varDecl [TOK_NEWLINE %CommandList]
+| %assign [TOK_NEWLINE %CommandList]
+| %if [TOK_NEWLINE %CommandList]
+| %for [TOK_NEWLINE %CommandList]
+| %do [TOK_NEWLINE %CommandList]
+| %while [TOK_NEWLINE %CommandList]
+
+%varDecl=
+[%varDeclVisibility] %varDeclModifier %varDeclList
+| [%varDeclModifier] %varDeclVisibility %varDeclList
+
+%varDeclList=
+%varDeclList TOK_PUNCT_COMMA %varDeclList
+| %assign
+
+%varDeclKeywords=
+TOK_DIM
+| TOK_GLOBAL
+| TOK_LOCAL
+
+%varDeclModifier=
+| TOK_SYNCHRONIZED
+| TOK_STATIC
+| TOK_CONST
+
+%number=
+TOK_NUMBER_HEX
+| TOK_NUMBER_DEC
+| TOK_NUMBER_BIN
+
+%binaryOp=
+TOK_OP_MOD
+| TOK_OP_ADD
+| TOK_OP_SUB
+| TOK_OP_MUL
+| TOK_OP_DIV
+| TOK_OP_SHL
+| TOK_OP_SHR
+| TOK_OP_JOIN
+| TOK_OP_POW
+| %comparision
+| %logicBinOp
+
+%comparision=
+TOK_COMP_EQCASE
+| TOK_COMP_EQINCASE
+| TOK_COMP_LOWEREQ
+| TOK_COMP_GREATEREQ
+| TOK_COMP_NOTEQ
+| TOK_COMP_LESS
+| TOK_COMP_GREATER
+
+%logicBinOp=
+TOK_LOGIC_OR
+| TOK_LOGIC_AND
+
+
+
+-------------------------------------------------------------------
+
+
+TOK_IF="if"
+TOK_SWITCH="switch"
+TOK_SELECT="select"
+TOK_ELSE="else"
+TOK_ELSEIF="elseif"
+TOK_THEN="then"
+TOK_FOR="for"
+TOK_WHILE="while"
+TOK_DO="do"
+TOK_FUNCDECL="func"
+TOK_FUNC=Any Word character
+TOK_PREPROCESS="#" + Any Word character
+TOK_VARDECL="dim"
+TOK_VAR="$" + Any Word character
+TOK_LITERAL=("\"" + anything + "\"") | ("'" + anything + "'")
+TOK_CLASS="class"
+TOK_ENDCLASS="endclass"
+TOK_PREDEFINEDVAR="@" + Any Word character
+TOK_RETURN="return"
+TOK_CONTINUE="continue"
+TOK_DEFAULT="default"
+TOK_GEN_EXIT="exit"
+TOK_CASE="case"
+TOK_STATIC="static"
+TOK_VOLATILE="volatile"
+TOK_CONST="const"
+TOK_WITH="with"
+TOK_ENDWITH="endwith"
+TOK_ENDIF="endif"
+TOK_ENDSELECT="endselect"
+TOK_ENDSWITCH="endswitch"
+TOK_TO="to"
+TOK_STEP="step"
+TOK_NULL="null"
+TOK_UNTIL="until"
+TOK_NEXT="next"
+TOK_WEND="wend"
+TOK_BRACKET_OPEN="{"
+TOK_BRACKET_CLOSE="}"
+TOK_ENDFUNC="endfunc"
+TOK_UNKNOWN=?
+TOK_ENUM="enum"
+TOK_SYNCHRONIZED ="synchronized"
+TOK_BYREF="byref"
+TOK_OP_NOT="not" | "!"
+TOK_OP_MOD="%"
+TOK_OP_ADD="+"
+TOK_OP_SUB="-"
+TOK_OP_MUL="*"
+TOK_OP_DIV="/"
+TOK_OP_SHL="<<"
+TOK_OP_SHR=">>"
+TOK_OP_JOIN="&"
+TOK_OP_POW="^"
+TOK_OP_INC="++"
+TOK_OP_DEC="--"
+TOK_ASSIGN="="
+TOK_DEFAULT_ASSIGN="="
+TOK_ASSIGN_MOD="%="
+TOK_ASSIGN_ADD="+="
+TOK_ASSIGN_SUB="-="
+TOK_ASSIGN_MUL="*="
+TOK_ASSIGN_DIV="/="
+TOK_ASSIGN_SHL="<<="
+TOK_ASSIGN_SHR=">>="
+TOK_ASSIGN_JOIN="&="
+TOK_ASSIGN_POW="^="
+TOK_COMP_EQCASE="=="
+TOK_COMP_EQINCASE="="
+TOK_COMP_LOWEREQ="<="
+TOK_COMP_GREATEREQ=">="
+TOK_COMP_NOTEQ="!=" | "<>"
+TOK_COMP_LESS="<"
+TOK_COMP_GREATER=">"
+TOK_LOGIC_AND="and" | "&&"
+TOK_LOGIC_OR="or" | "||"
+TOK_PUNCT_COMMENT=";"
+TOK_PUNCT_DOT="."
+TOK_PUNCT_COMMA=","
+TOK_PUNCT_QST="?"
+TOK_PUNCT_DOUBLEDOT=":"
+TOK_NUMBER_HEX=Number aus hex
+TOK_NUMBER_DEC=Number
+TOK_NUMBER_BIN=Number as bin
+TOK_EXIT_LOOP="exitloop" | "break"
+TOK_TRUE="true"
+TOK_FALSE="false"
+TOK_BRACKET_ROUND_OPEN="("
+TOK_NEW="new"
+TOK_BRACKET_ANGLE_OPEN="<"
+TOK_BRACKET_ARRAY_OPEN="["
+TOK_BRACKET_ROUND_CLOSE=")"
+TOK_PUNCT_NOT=""
+TOK_BRACKET_ANGLE_CLOSE=">"
+TOK_BRACKET_ARRAY_CLOSE="]"
+TOK_NEWLINE="\n"
+TOK_BRACKET_ARRAY_ACCESS="[]"
+TOK_BRACKET_ARRAY_CREATION="[]"
+TOK_BRACKET_ARRAY_APPEND="[]"
+TOK_JMP_LABEL=Any Word character + ":"

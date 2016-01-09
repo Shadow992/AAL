@@ -275,7 +275,7 @@ void AalVariable::clearCompletely(AalVariable* var)
 /**
 * \brief  This method constructs and inits the variable. If variable was already constructed, it first will be cleared.
 *
-* \param type type of constructed variable (only TYPE_LONG, TYPE_STRING and TYPE_DOUBLE are allowed)
+* \param type type of constructed variable (only TYPE_LONG, TYPE_STRING, TYPE_INTERNAL_CLASS and TYPE_DOUBLE are allowed)
 *
 */
 void AalVariable::construct(char type)
@@ -646,7 +646,7 @@ void AalVariable::makeCompareable(void*& var1, char& valueType1,void*& var2, cha
 *
 * \param idx index of valueType to return
 *
-* \return type of value atd idx
+* \return type of value at idx
 *
 */
 char AalVariable::getType(const int idx)
